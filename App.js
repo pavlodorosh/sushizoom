@@ -1,27 +1,21 @@
-import React, {useEffect} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  StatusBar,
-} from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
-
-import Header from './src/components/Header/Header';
 import StartScreen from './src/screens/StartScreen'
+import CategoryScreen from './src/screens/CategoryScreen'
+
+const Stack = createStackNavigator()
 
 const App = () => {
-
-
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
-          <Header />          
-          <StartScreen />
-        </ScrollView>
-      </SafeAreaView>
+    <>        
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Start" component={StartScreen} options={{title: 'Головна'}} />
+          <Stack.Screen name="Category" component={CategoryScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </>
   );
 };
