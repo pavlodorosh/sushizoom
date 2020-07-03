@@ -21,7 +21,7 @@ const cities = {
 }
 
 const StartScreen = () => {
-  const [region, setRegion] = useState(null);
+  const [region, setRegion] = useState('rivne');
 
   return (
     <>
