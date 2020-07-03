@@ -4,93 +4,59 @@ import {
   Text,
   Image,
   SafeAreaView,
-  StyleSheet,
   ScrollView,
   StatusBar,
-  TouchableWithoutFeedback,
 } from 'react-native';
 import {Picker} from '@react-native-community/picker';
 
 import Header from '../components/Header/Header';
-import Colors from '../styles/Colors';
+import Styles from '../styles/StartStyles';
 
-const StartScreen = ({navigation}) => {
-  const [value, setValue] = useState('rivne');
+
+const cities = {
+  rivne: ['Місто 1', 'Місто 2', 'Місто 3', 'Місто 4'],
+  kiev: ['Місто 1', 'Місто 2', 'Місто 3'],
+  zhutomir: ['Місто 1', 'Місто 2'],
+  khmelnitsk: ['Місто 1'],
+}
+
+const StartScreen = () => {
+  const [region, setRegion] = useState(null);
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
-          <Header />
-          {/* <TouchableWithoutFeedback onPressIn={() => navigation.navigate('Category')}> */}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Image
-                source={require('../../assets/images/logo.png')}
-                style={{width: 180, resizeMode: 'contain'}}
-              />
-              <View
-                style={{
-                  borderRadius: 50,
-                  overflow: 'hidden',
-                  backgroundColor: '#ff0000',
-                  justifyContent: 'center',
-                  alignContent: 'center',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  textAlign: 'center',
-                }}>
-                <Picker
-                  selectedValue={value}
-                  onValueChange={v => setValue(v)}
-                  style={{
-                    width: 260,
-                    height: 50,
-                    color: Colors.white,
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    textAlign: 'center',
-                  }}>
-                  <Picker.Item label="Рівненська" value="rivne" />
-                  <Picker.Item label="Київська" value="kiev" />
-                  <Picker.Item label="Житомирська" value="xhutomir" />
-                  <Picker.Item label="Хмельницька" value="khmenitsk" />
-                </Picker>
-              </View>
-
-              <Text style={styles.sectionTitle}>Доставка Японської Кухні</Text>
+        <Header />
+        <View style={Styles.body}>
+          <View style={Styles.sectionContainer}>
+            <Image
+              source={require('../../assets/images/logo.png')}
+              style={Styles.logoMain}
+            />
+            <View style={Styles.selectContainer}>
+              <Picker
+                selectedValue={region}
+                onValueChange={v => setRegion(v)}
+                style={Styles.select}>
+                <Picker.Item label="Рівненська" value="rivne" />
+                <Picker.Item label="Київська" value="kiev" />
+                <Picker.Item label="Житомирська" value="zhutomir" />
+                <Picker.Item label="Хмельницька" value="khmelnitsk" />
+              </Picker>
             </View>
+            { 
+              region != null && (
+                cities[region].map((item, index) => {
+                  return <Text style={Styles.cityListItem} key={index}>{item}</Text>
+                }) 
+              )                
+            }
           </View>
-          {/* </TouchableWithoutFeedback> */}
-        </ScrollView>
+        </View>
       </SafeAreaView>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  body: {
-    backgroundColor: Colors.black,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  sectionContainer: {
-    margin: 32,
-    paddingHorizontal: 24,
-    justifyContent: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    flexWrap: 'wrap',
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.white,
-  },
-});
 
 export default StartScreen;
