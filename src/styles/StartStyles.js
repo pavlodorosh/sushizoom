@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
 import Colors from './Colors'
+import { StyleSheet } from 'react-native'
 
 const Styles = StyleSheet.create({
     body: {
@@ -34,7 +34,7 @@ const Styles = StyleSheet.create({
     },
     selectContainer: {
         borderRadius: 50,
-        backgroundColor: '#ff0000',
+        backgroundColor: Colors.red,
     },
     cityListItem: {
       marginTop: 10,
@@ -43,9 +43,10 @@ const Styles = StyleSheet.create({
       color: Colors.white,
     },
     logoMain: {
-      width: 180, 
       resizeMode: 'contain',
-      maxHeight: '40%'
+      height: '20%',
+      marginTop: '40%',
+      marginBottom: 20
     }
 });
 
