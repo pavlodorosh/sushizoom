@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 
 import Header from '../components/Header/Header';
 import {Picker} from '@react-native-community/picker';
-import Styles from '../styles/StartStyles';
+import Styles from '../styles/Styles';
 
 const cities = {
   rivne: {
@@ -24,7 +24,7 @@ const cities = {
   },
 };
 
-const StartScreen = () => {
+const StartScreen = ({navigation}) => {
   const [region, setRegion] = useState('rivne');
 
   return (
@@ -41,7 +41,9 @@ const StartScreen = () => {
             <View style={Styles.selectContainer}>
               <Picker
                 selectedValue={region}
-                onValueChange={v => setRegion(v)}
+                onValueChange={v => {
+                  setRegion(v);
+                }}
                 style={Styles.select}>
                 {Object.keys(cities).map((item, index) => {
                   return (
@@ -57,7 +59,12 @@ const StartScreen = () => {
             {region != null &&
               cities[region]['arr'].map((item, index) => {
                 return (
-                  <Text style={Styles.cityListItem} key={index}>
+                  <Text
+                    style={Styles.cityListText}
+                    key={index}
+                    onPress={() => {
+                      navigation.navigate('Category', {region, city: item});
+                    }}>
                     {item}
                   </Text>
                 );

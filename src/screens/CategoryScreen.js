@@ -1,31 +1,41 @@
-import React from 'react';
 import {
-  View, 
-  Text, 
-  Image, 
+  Image,
   SafeAreaView,
-  StyleSheet,
   ScrollView,
-  StatusBar
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native';
 
-import Header from '../components/Header/Header';
-import Colors from '../styles/Colors';
+import React from 'react';
+import Styles from '../styles/Styles';
 
-const StartScreen = () => {
+const CategoryScreen = ({navigation, route}) => {
+  const { region } = route.params
+  const { city } = route.params
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView contentInsetAdjustmentBehavior="automatic">
-          <Header />
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
+          <View style={Styles.body}>
+            <View style={Styles.sectionContainer}>
               <Image
                 source={require('../../assets/images/logo.png')}
-                style={{width: 180, resizeMode: 'contain'}}
+                style={Styles.logoCategory}
               />
-              <Text style={styles.sectionTitle}>Категорія</Text>
+              <Image
+                source={require('../../assets/images/_Sushiboom.jpg')}
+                style={Styles.categoryImg}
+              />
+              <Text style={Styles.categoryTitle}>КАТАЛОГ</Text>
+              <Image
+                source={require('../../assets/images/_Sushiboom.jpg')}
+                style={Styles.categoryImg}
+              />
+              <Text style={Styles.categoryTitleAction}>АКЦІЇ</Text>
             </View>
           </View>
         </ScrollView>
@@ -34,29 +44,5 @@ const StartScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  body: {
-    backgroundColor: Colors.black,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  sectionContainer: {
-    margin: 32,
-    paddingHorizontal: 24,
-    justifyContent: 'center',
-    alignContent: 'center',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.white,
-  },
-});
 
-export default StartScreen;
+export default CategoryScreen;

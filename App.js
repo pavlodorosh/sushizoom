@@ -1,9 +1,8 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-
-import StartScreen from './src/screens/StartScreen';
 import CategoryScreen from './src/screens/CategoryScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import React from 'react';
+import StartScreen from './src/screens/StartScreen';
+import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
@@ -16,11 +15,7 @@ const App = () => {
             headerShown: false,
             showLabel: false,
           }}>
-          <Stack.Screen
-            name="Start"
-            component={StartScreen}
-            options={{title: 'Головна'}}
-          />
+          <Stack.Screen name="Start" component={StartScreen} />
           <Stack.Screen name="Category" component={CategoryScreen} />
         </Stack.Navigator>
       </NavigationContainer>
