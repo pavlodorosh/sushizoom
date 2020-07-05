@@ -2,6 +2,9 @@ import {Dimensions, StyleSheet} from 'react-native';
 
 import Colors from './Colors';
 
+const productCategoryHeight = 180
+const productCategoryHalfWidth = Dimensions.get('window').width / 2 - 20
+
 const Styles = StyleSheet.create({
   body: {
     backgroundColor: Colors.black,
@@ -9,12 +12,58 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     minHeight: Dimensions.get('window').height,
   },
-  categoryContainer: {},
   categoryImg: {
     resizeMode: 'contain',
     height: 150,
     marginTop: 50,
     marginBottom: 20,
+  },
+  categoryProductButton:{
+    alignItems: 'center', 
+    justifyContent: 'center', 
+  },
+  categoryProductButtonText: {
+    color: Colors.white,
+    backgroundColor: Colors.red,
+    paddingHorizontal: 25,
+    paddingVertical: 5,
+    borderRadius: 50,
+    marginTop: 10
+  },
+  categoryProductImage: {
+    resizeMode: 'contain',
+    position: 'relative',
+    width: productCategoryHalfWidth + 30,
+    height: productCategoryHeight
+
+  },
+  categoryProductTitle: {
+    color: Colors.white,
+    fontSize: 20,
+    fontWeight: 'bold',
+    width: productCategoryHalfWidth
+  },
+  categoryProductText: {
+    color: Colors.white,
+    fontSize: 12,
+    width: productCategoryHalfWidth,
+    marginTop: 5
+  },
+  categoryProductSection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    alignContent: 'flex-start',
+    marginVertical: 20,
+    borderBottomColor: Colors.dark,
+    borderBottomWidth: 2
+  },
+  categoryProductSectionText:{
+    flexDirection: 'column',
+    alignItems: 'center',
+    alignContent: 'center',
+    marginLeft: 10,
+    height: productCategoryHeight
   },
   categoryTitle: {
     color: Colors.white,

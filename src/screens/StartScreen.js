@@ -1,7 +1,6 @@
 import {Image, SafeAreaView, StatusBar, Text, View} from 'react-native';
 import React, {useState} from 'react';
 
-import Header from '../components/Header/Header';
 import {Picker} from '@react-native-community/picker';
 import Styles from '../styles/Styles';
 
@@ -30,48 +29,45 @@ const StartScreen = ({navigation}) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <Header />
-        <View style={Styles.body}>
-          <View style={Styles.sectionContainer}>
-            <Image
-              source={require('../../assets/images/logo.png')}
-              style={Styles.logoMain}
-            />
-            <View style={Styles.selectContainer}>
-              <Picker
-                selectedValue={region}
-                onValueChange={v => {
-                  setRegion(v);
-                }}
-                style={Styles.select}>
-                {Object.keys(cities).map((item, index) => {
-                  return (
-                    <Picker.Item
-                      label={cities[item].label}
-                      value={item}
-                      key={index}
-                    />
-                  );
-                })}
-              </Picker>
-            </View>
-            {region != null &&
-              cities[region]['arr'].map((item, index) => {
+      <View style={Styles.body}>
+        <View style={Styles.sectionContainer}>
+          <Image
+            source={require('../../assets/images/logo.png')}
+            style={Styles.logoMain}
+          />
+          <View style={Styles.selectContainer}>
+            <Picker
+              selectedValue={region}
+              onValueChange={v => {
+                setRegion(v);
+              }}
+              style={Styles.select}>
+              {Object.keys(cities).map((item, index) => {
                 return (
-                  <Text
-                    style={Styles.cityListText}
+                  <Picker.Item
+                    label={cities[item].label}
+                    value={item}
                     key={index}
-                    onPress={() => {
-                      navigation.navigate('Category', {region, city: item});
-                    }}>
-                    {item}
-                  </Text>
+                  />
                 );
               })}
+            </Picker>
           </View>
+          {region != null &&
+            cities[region]['arr'].map((item, index) => {
+              return (
+                <Text
+                  style={Styles.cityListText}
+                  key={index}
+                  onPress={() => {
+                    navigation.navigate('Category', {region, city: item});
+                  }}>
+                  {item}
+                </Text>
+              );
+            })}
         </View>
-      </SafeAreaView>
+      </View>
     </>
   );
 };

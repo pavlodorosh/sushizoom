@@ -1,3 +1,4 @@
+import CategoryProductsScreen from './src/screens/CategoryProductsScreen';
 import CategoryScreen from './src/screens/CategoryScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
@@ -17,6 +18,7 @@ const App = () => {
           }}>
           <Stack.Screen name="Start" component={StartScreen} />
           <Stack.Screen name="Category" component={CategoryScreen} />
+          <Stack.Screen name="CategoryProducts" component={CategoryProductsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
