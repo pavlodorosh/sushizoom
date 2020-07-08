@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "770466990450",
+    "firebase_url": "https://sushizoom-20200708.firebaseio.com",
+    "project_id": "sushizoom-20200708",
+    "storage_bucket": "sushizoom-20200708.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770466990450:android:d8e0fbf450a05c5f9f75eb",
+        "android_client_info": {
+          "package_name": "com.sushizoom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770466990450-990jrdslvjfi0ivjlqia8saih8nja8a9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMI_wB0fgdEent2QI1cEZsLgqGd_cmuqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770466990450-990jrdslvjfi0ivjlqia8saih8nja8a9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
