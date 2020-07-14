@@ -8,11 +8,27 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import React, {useEffect} from 'react';
 
-import React from 'react';
 import Styles from '../styles/Styles';
+import firebase from '../../firebase'
+import firestore from '@react-native-firebase/firestore'
+
+const SushiSetCollection = firestore().collection('SushiSet').doc('AuX3df6ooDtLnWtH8z57')
 
 const CategoryProductsScreen = ({navigation, route}) => {
+  useEffect(()=>{
+    SushiSetCollection.get().then(doc => {
+      if(doc.exists){
+        console.log(doc.data())
+      } else {
+        console.log('empty')
+      }
+    }).catch(error => {
+      console.log(error)
+    })
+  }, [])
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
