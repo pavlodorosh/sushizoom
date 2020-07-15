@@ -7,6 +7,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
+
 const App = () => {
   return (
     <>
@@ -18,7 +19,10 @@ const App = () => {
           }}>
           <Stack.Screen name="Start" component={StartScreen} />
           <Stack.Screen name="Category" component={CategoryScreen} />
-          <Stack.Screen name="CategoryProducts" component={CategoryProductsScreen} />
+          <Stack.Screen
+            name="CategoryProducts"
+            component={CategoryProductsScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>

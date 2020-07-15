@@ -8,26 +8,25 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import Styles from '../styles/Styles';
-import firebase from '../../firebase'
-import firestore from '@react-native-firebase/firestore'
-
-const SushiSetCollection = firestore().collection('SushiSet').doc('AuX3df6ooDtLnWtH8z57')
+import firestore from '@react-native-firebase/firestore';
 
 const CategoryProductsScreen = ({navigation, route}) => {
-  useEffect(()=>{
-    SushiSetCollection.get().then(doc => {
-      if(doc.exists){
-        console.log(doc.data())
-      } else {
-        console.log('empty')
-      }
-    }).catch(error => {
-      console.log(error)
-    })
-  }, [])
+  const [products, setProducts] = useState(null)
+
+  useEffect(() => {
+    const subscriber = firestore()
+      .collection('Catalog/c8HZNaeDG6BoFwotRgSa/SushiSet')
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(documentSnapshot => {
+          setProducts(documentSnapshot.data())
+        });
+      });
+
+  }, []);
 
   return (
     <>
@@ -39,111 +38,33 @@ const CategoryProductsScreen = ({navigation, route}) => {
               source={require('../../assets/images/logo.png')}
               style={Styles.logoCategory}
             />
-            <View style={Styles.categoryProductSection}>
-              <Image
-                source={require('../../assets/images/_Sushiboom.jpg')}
-                style={Styles.categoryProductImage}
-              />
-              <View style={Styles.categoryProductSectionText}>
-                <Text style={Styles.categoryProductTitle}>SUSHIZOOM</Text>
-                <Text style={Styles.categoryProductTitle}>390 ГРН</Text>
-                <Text style={Styles.categoryProductText}>
-                  макі з лососем½ , макі філа ½ , макі з огірком½, макі з
-                  авокадо½, філадельфія з лососем½ , філадельфія з вугрем{' '}
-                </Text>
-                <TouchableOpacity onPress={() => {}}>
-                  <View styl={Styles.categoryProductButton}>
-                    <Text style={Styles.categoryProductButtonText}>
-                      ЗАМОВИТИ
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={Styles.categoryProductSection}>
-              <Image
-                source={require('../../assets/images/_Sushiboom.jpg')}
-                style={Styles.categoryProductImage}
-              />
-              <View style={Styles.categoryProductSectionText}>
-                <Text style={Styles.categoryProductTitle}>SUSHIZOOM</Text>
-                <Text style={Styles.categoryProductTitle}>390 ГРН</Text>
-                <Text style={Styles.categoryProductText}>
-                  макі з лососем½ , макі філа ½ , макі з огірком½, макі з
-                  авокадо½, філадельфія з лососем½ , філадельфія з вугрем{' '}
-                </Text>
-                <TouchableOpacity onPress={() => {}}>
-                  <View styl={Styles.categoryProductButton}>
-                    <Text style={Styles.categoryProductButtonText}>
-                      ЗАМОВИТИ
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={Styles.categoryProductSection}>
-              <Image
-                source={require('../../assets/images/_Sushiboom.jpg')}
-                style={Styles.categoryProductImage}
-              />
-              <View style={Styles.categoryProductSectionText}>
-                <Text style={Styles.categoryProductTitle}>SUSHIZOOM</Text>
-                <Text style={Styles.categoryProductTitle}>390 ГРН</Text>
-                <Text style={Styles.categoryProductText}>
-                  макі з лососем½ , макі філа ½ , макі з огірком½, макі з
-                  авокадо½, філадельфія з лососем½ , філадельфія з вугрем{' '}
-                </Text>
-                <TouchableOpacity onPress={() => {}}>
-                  <View styl={Styles.categoryProductButton}>
-                    <Text style={Styles.categoryProductButtonText}>
-                      ЗАМОВИТИ
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={Styles.categoryProductSection}>
-              <Image
-                source={require('../../assets/images/_Sushiboom.jpg')}
-                style={Styles.categoryProductImage}
-              />
-              <View style={Styles.categoryProductSectionText}>
-                <Text style={Styles.categoryProductTitle}>SUSHIZOOM</Text>
-                <Text style={Styles.categoryProductTitle}>390 ГРН</Text>
-                <Text style={Styles.categoryProductText}>
-                  макі з лососем½ , макі філа ½ , макі з огірком½, макі з
-                  авокадо½, філадельфія з лососем½ , філадельфія з вугрем{' '}
-                </Text>
-                <TouchableOpacity onPress={() => {}}>
-                  <View styl={Styles.categoryProductButton}>
-                    <Text style={Styles.categoryProductButtonText}>
-                      ЗАМОВИТИ
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={Styles.categoryProductSection}>
-              <Image
-                source={require('../../assets/images/_Sushiboom.jpg')}
-                style={Styles.categoryProductImage}
-              />
-              <View style={Styles.categoryProductSectionText}>
-                <Text style={Styles.categoryProductTitle}>SUSHIZOOM</Text>
-                <Text style={Styles.categoryProductTitle}>390 ГРН</Text>
-                <Text style={Styles.categoryProductText}>
-                  макі з лососем½ , макі філа ½ , макі з огірком½, макі з
-                  авокадо½, філадельфія з лососем½ , філадельфія з вугрем{' '}
-                </Text>
-                <TouchableOpacity onPress={() => {}}>
-                  <View styl={Styles.categoryProductButton}>
-                    <Text style={Styles.categoryProductButtonText}>
-                      ЗАМОВИТИ
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
+              {                
+                products != null && (
+                    Object.keys(products).map((item, index) => {
+                      return (
+                        <View style={Styles.categoryProductSection}>
+                          <Image
+                            source={require('../../assets/images/_Sushiboom.jpg')}
+                            style={Styles.categoryProductImage}
+                          />
+                          <View key={index} style={Styles.categoryProductSectionText}>
+                            <Text style={Styles.categoryProductTitle}>{products[item].name}</Text>
+                            <Text style={Styles.categoryProductTitle}>{item.price} ГРН</Text>
+                            <Text style={Styles.categoryProductText}>{item.ingredients}</Text>
+                            <TouchableOpacity onPress={() => {}}>
+                              <View styl={Styles.categoryProductButton}>
+                                <Text style={Styles.categoryProductButtonText}>
+                                  ЗАМОВИТИ
+                                </Text>
+                              </View>
+                            </TouchableOpacity>
+                          </View>
+                        </View>
+                      )
+                    })
+                )
+              }
+              
           </View>
         </View>
       </ScrollView>
