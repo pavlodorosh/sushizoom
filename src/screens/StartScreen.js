@@ -67,7 +67,7 @@ const StartScreen = ({navigation}) => {
                   style={Styles.cityListText}
                   key={index}
                   onPress={() => {
-                    navigation.navigate('Category', {region, city: item});
+                    navigation.navigate('Main', {region, city: item});
                   }}>
                   {item}
                 </Text>

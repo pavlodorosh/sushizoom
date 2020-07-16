@@ -1,6 +1,7 @@
-import CategoryProductsScreen from './src/screens/CategoryProductsScreen';
-import CategoryScreen from './src/screens/CategoryScreen';
+import CatalogScreen from './src/screens/CatalogScreen';
+import MainScreen from './src/screens/MainScreen';
 import {NavigationContainer} from '@react-navigation/native';
+import ProductsScreen from './src/screens/ProductsScreen';
 import React from 'react';
 import StartScreen from './src/screens/StartScreen';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -18,10 +19,11 @@ const App = () => {
             showLabel: false,
           }}>
           <Stack.Screen name="Start" component={StartScreen} />
-          <Stack.Screen name="Category" component={CategoryScreen} />
+          <Stack.Screen name="Main" component={MainScreen} />
+          <Stack.Screen name="Catalog" component={CatalogScreen} />
           <Stack.Screen
-            name="CategoryProducts"
-            component={CategoryProductsScreen}
+            name="Products"
+            component={ProductsScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

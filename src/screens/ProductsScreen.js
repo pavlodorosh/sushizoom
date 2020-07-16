@@ -13,16 +13,18 @@ import React, {useEffect, useState} from 'react';
 import Styles from '../styles/Styles';
 import firestore from '@react-native-firebase/firestore';
 
-const CategoryProductsScreen = ({navigation, route}) => {
-  const [products, setProducts] = useState(null)
+const ProductsScreen = ({navigation, route}) => {
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
+    setProducts([])
+    console.log(route)
     const subscriber = firestore()
-      .collection('Catalog/c8HZNaeDG6BoFwotRgSa/SushiSet')
+      .collection(`Catalog/c8HZNaeDG6BoFwotRgSa/${route.params.collection}`)
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(documentSnapshot => {
-          setProducts(documentSnapshot.data())
+          setProducts(prevState => [...prevState, documentSnapshot.data()])
         });
       });
 
@@ -39,18 +41,18 @@ const CategoryProductsScreen = ({navigation, route}) => {
               style={Styles.logoCategory}
             />
               {                
-                products != null && (
+                products.length != 0 && (
                     Object.keys(products).map((item, index) => {
                       return (
-                        <View style={Styles.categoryProductSection}>
+                        <View style={Styles.categoryProductSection} key={index}>
                           <Image
-                            source={require('../../assets/images/_Sushiboom.jpg')}
+                            source={{uri: products[item].img}}
                             style={Styles.categoryProductImage}
                           />
                           <View key={index} style={Styles.categoryProductSectionText}>
                             <Text style={Styles.categoryProductTitle}>{products[item].name}</Text>
-                            <Text style={Styles.categoryProductTitle}>{item.price} ГРН</Text>
-                            <Text style={Styles.categoryProductText}>{item.ingredients}</Text>
+                            <Text style={Styles.categoryProductTitle}>{products[item].price} ГРН</Text>
+                            <Text style={Styles.categoryProductText}>{products[item].ingredients}</Text>
                             <TouchableOpacity onPress={() => {}}>
                               <View styl={Styles.categoryProductButton}>
                                 <Text style={Styles.categoryProductButtonText}>
@@ -63,8 +65,7 @@ const CategoryProductsScreen = ({navigation, route}) => {
                       )
                     })
                 )
-              }
-              
+              }              
           </View>
         </View>
       </ScrollView>
@@ -72,4 +73,4 @@ const CategoryProductsScreen = ({navigation, route}) => {
   );
 };
 
-export default CategoryProductsScreen;
+export default ProductsScreen;

@@ -2,7 +2,7 @@ import {Dimensions, StyleSheet} from 'react-native';
 
 import Colors from './Colors';
 
-const productCategoryHeight = 180
+const productCategoryHeight = 'auto'
 const productCategoryHalfWidth = Dimensions.get('window').width / 2 - 20
 
 const Styles = StyleSheet.create({
@@ -34,8 +34,7 @@ const Styles = StyleSheet.create({
     resizeMode: 'contain',
     position: 'relative',
     width: productCategoryHalfWidth + 30,
-    height: productCategoryHeight
-
+    height: 180
   },
   categoryProductTitle: {
     color: Colors.white,
@@ -56,13 +55,14 @@ const Styles = StyleSheet.create({
     alignContent: 'flex-start',
     marginVertical: 20,
     borderBottomColor: Colors.dark,
-    borderBottomWidth: 2
+    borderBottomWidth: 2,
   },
   categoryProductSectionText:{
     flexDirection: 'column',
     alignItems: 'center',
     alignContent: 'center',
     marginLeft: 10,
+    paddingBottom: 10,
     height: productCategoryHeight
   },
   categoryTitle: {

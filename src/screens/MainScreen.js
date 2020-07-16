@@ -28,7 +28,7 @@ const CategoryScreen = ({navigation, route}) => {
             />
             <TouchableWithoutFeedback
               onPress={() => {
-                navigation.navigate('CategoryProducts', {region, city});
+                navigation.navigate('Catalog', {region, city});
               }}>
               <Image
                 source={require('../../assets/images/_Sushiboom.jpg')}
@@ -38,13 +38,13 @@ const CategoryScreen = ({navigation, route}) => {
             <Text
               style={Styles.categoryTitle}
               onPress={() => {
-                navigation.navigate('CategoryProducts', {region, city});
+                navigation.navigate('Catalog', {region, city});
               }}>
               КАТАЛОГ
             </Text>
             <TouchableWithoutFeedback
               onPress={() => {
-                navigation.navigate('CategoryProducts', {region, city});
+                navigation.navigate('Start', {region, city});
               }}>
               <Image
                 source={require('../../assets/images/_Sushiboom.jpg')}
@@ -54,7 +54,7 @@ const CategoryScreen = ({navigation, route}) => {
             <Text
               style={Styles.categoryTitleAction}
               onPress={() => {
-                navigation.navigate('CategoryProducts', {region, city});
+                navigation.navigate('Start', {region, city});
               }}>
               АКЦІЇ
             </Text>
