@@ -88,6 +88,11 @@ const Styles = StyleSheet.create({
     fontSize: 20,
     color: Colors.white,
   },
+  input: {
+    backgroundColor: 'transparent',
+    borderBottomColor: Colors.dark,
+    borderBottomWidth: 1,
+  },
   logoCategory: {
     resizeMode: 'contain',
     height: 100,

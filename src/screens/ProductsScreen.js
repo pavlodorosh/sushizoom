@@ -18,7 +18,6 @@ const ProductsScreen = ({navigation, route}) => {
 
   useEffect(() => {
     setProducts([])
-    console.log(route)
     const subscriber = firestore()
       .collection(`Catalog/c8HZNaeDG6BoFwotRgSa/${route.params.collection}`)
       .get()
@@ -53,7 +52,9 @@ const ProductsScreen = ({navigation, route}) => {
                             <Text style={Styles.categoryProductTitle}>{products[item].name}</Text>
                             <Text style={Styles.categoryProductTitle}>{products[item].price} ГРН</Text>
                             <Text style={Styles.categoryProductText}>{products[item].ingredients}</Text>
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity onPress={() => {
+                              navigation.navigate('Order', {product: products[item]});
+                            }}>
                               <View styl={Styles.categoryProductButton}>
                                 <Text style={Styles.categoryProductButtonText}>
                                   ЗАМОВИТИ
