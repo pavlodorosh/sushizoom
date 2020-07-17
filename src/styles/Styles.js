@@ -4,6 +4,7 @@ import Colors from './Colors';
 
 const productCategoryHeight = 'auto'
 const productCategoryHalfWidth = Dimensions.get('window').width / 2 - 20
+const formWidth = Dimensions.get('window').width - 50
 
 const Styles = StyleSheet.create({
   body: {
@@ -88,10 +89,25 @@ const Styles = StyleSheet.create({
     fontSize: 20,
     color: Colors.white,
   },
-  input: {
+  endText: {
+    color: Colors.white,
     backgroundColor: 'transparent',
-    borderBottomColor: Colors.dark,
+    fontSize: 24
+    // bac
+  },
+  form: {
+    marginTop: 30
+  },
+  input: {
+    borderBottomColor: Colors.light,
+    // backgroundColor: 'transparent',
     borderBottomWidth: 1,
+    width: formWidth,
+    color: Colors.light,
+    textAlign: 'center',
+    fontSize: 18,
+    height: 50,
+    marginBottom: 10
   },
   logoCategory: {
     resizeMode: 'contain',
@@ -103,6 +119,20 @@ const Styles = StyleSheet.create({
     height: '20%',
     marginTop: '40%',
     marginBottom: 20,
+  },
+  orderBtn: {
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    width: '100%'
+  },
+  orderBtnText: {
+    color: Colors.white,
+    backgroundColor: Colors.red,
+    paddingHorizontal: 40,
+    paddingVertical: 8,
+    borderRadius: 50,
+    marginTop: 10,
+    textAlign: 'center',
   },
   sectionContainer: {
     margin: 32,

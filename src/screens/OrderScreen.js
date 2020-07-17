@@ -5,6 +5,7 @@ import {
     ScrollView,
     StatusBar,
     Text,
+    TextInput,
     TouchableOpacity,
     UselessTextInput,
     View,
@@ -12,15 +13,27 @@ import {
 import React, {useEffect, useState} from 'react';
 
 import Styles from '../styles/Styles';
-import { TextInput } from 'react-native-paper';
+import Telegram from 'telegram-send-message'
 
 const OrderScreen = ({navigation, route}) => {
 
     const [name, setName] = useState('')
+    const [phone, setPhone] = useState('')
+    const [address, setAddress] = useState('')
+    const [comment, setComment] = useState('')
   
     useEffect(() => {
-        
+        console.log(route.params.product)
     }, []);
+
+    const sendMessage = () => {
+      let message = `Нове замовлення! Імя: ${name}, Телефон: ${phone}, Адреса: ${address}, Коментар: ${comment}, Товар: ${route.params.product.name}`
+
+      Telegram.setToken('868514272:AAH6bAavjGQHH-bztp9Buu1ugozGVfNCgl0');
+      Telegram.setRecipient(490328195);
+      Telegram.setMessage(message);
+      Telegram.send();
+    }
   
     return (
       <>
@@ -30,9 +43,51 @@ const OrderScreen = ({navigation, route}) => {
                 source={require('../../assets/images/logo.png')}
                 style={Styles.logoCategory}
                 />                   
-                <View>
-                      
-                </View>          
+                <View style={Styles.form}>
+                  <TextInput
+                    style={Styles.input}
+                    placeholder="Ім`я"
+                    placeholderTextColor="#DAE1E7"
+                    caretHidden={true}
+                    onChangeText={v => setName(v)}
+                    value={name}
+                  />
+                  <TextInput
+                    style={Styles.input}
+                    placeholder="Телефон"
+                    placeholderTextColor="#DAE1E7"
+                    caretHidden={true}
+                    onChangeText={v => setPhone(v)}
+                    value={phone}
+                  />
+                  <TextInput
+                    style={Styles.input}
+                    placeholder="Адреса"
+                    placeholderTextColor="#DAE1E7"
+                    caretHidden={true}
+                    onChangeText={v => setAddress(v)}
+                    value={address}
+                  />
+                  <TextInput
+                    style={Styles.input}
+                    placeholder="Коментар"
+                    placeholderTextColor="#DAE1E7"
+                    caretHidden={true}
+                    onChangeText={v => setComment(v)}
+                    value={comment}
+                  />
+                </View> 
+                <TouchableOpacity onPress={() => {
+                  sendMessage()
+
+                  navigation.navigate('End');
+                }}>
+                  <View styl={Styles.orderBtn}>
+                    <Text style={Styles.orderBtnText}>
+                      ЗАМОВИТИ
+                    </Text>
+                  </View>
+                </TouchableOpacity>        
             </View>
         </View>
       </>

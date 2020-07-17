@@ -1,4 +1,5 @@
 import CatalogScreen from './src/screens/CatalogScreen';
+import EndScreen from './src/screens/EndScreen';
 import MainScreen from './src/screens/MainScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import OrderScreen from './src/screens/OrderScreen';
@@ -20,6 +21,7 @@ const App = () => {
             showLabel: false,
           }}>
           <Stack.Screen name="Start" component={StartScreen} />
+          <Stack.Screen name="End" component={EndScreen} />
           <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Order" component={OrderScreen} />
           <Stack.Screen name="Catalog" component={CatalogScreen} />
