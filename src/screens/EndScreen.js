@@ -1,9 +1,14 @@
 import {Image, SafeAreaView, StatusBar, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 
 import Styles from '../styles/Styles';
 
 const EndScreen = ({navigation}) => {
+    useEffect(() => {
+        setTimeout(()=> {
+            navigation.navigate('Start');
+        }, 5000)
+    }, [])
 
   return (
     <>
