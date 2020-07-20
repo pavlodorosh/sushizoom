@@ -26,6 +26,10 @@ const ProductsScreen = ({navigation, route}) => {
           if(documentSnapshot.data().action){
             documentSnapshot.data().price = documentSnapshot.data().new_price
           }
+          if(route.params.city == 'Київ'){
+            documentSnapshot.data().price = (documentSnapshot.data().price * 1.2).toFixed(0)
+          }
+
           setProducts(prevState => [...prevState, documentSnapshot.data()])          
         });
       });

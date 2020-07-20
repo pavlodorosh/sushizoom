@@ -48,7 +48,6 @@ const OrderScreen = ({navigation, route}) => {
                     style={Styles.input}
                     placeholder="Ім`я"
                     placeholderTextColor="#DAE1E7"
-                    caretHidden={true}
                     onChangeText={v => setName(v)}
                     value={name}
                   />
@@ -56,7 +55,6 @@ const OrderScreen = ({navigation, route}) => {
                     style={Styles.input}
                     placeholder="Телефон"
                     placeholderTextColor="#DAE1E7"
-                    caretHidden={true}
                     onChangeText={v => setPhone(v)}
                     value={phone}
                   />
@@ -64,7 +62,6 @@ const OrderScreen = ({navigation, route}) => {
                     style={Styles.input}
                     placeholder="Адреса"
                     placeholderTextColor="#DAE1E7"
-                    caretHidden={true}
                     onChangeText={v => setAddress(v)}
                     value={address}
                   />
@@ -72,15 +69,15 @@ const OrderScreen = ({navigation, route}) => {
                     style={Styles.input}
                     placeholder="Коментар"
                     placeholderTextColor="#DAE1E7"
-                    caretHidden={true}
                     onChangeText={v => setComment(v)}
                     value={comment}
                   />
                 </View> 
-                <TouchableOpacity onPress={() => {
-                  sendMessage()
-
-                  navigation.navigate('End');
+                <TouchableOpacity onPress={() => {                  
+                  if(name != '' || phone != '' || address != '' ){
+                    sendMessage()
+                    navigation.navigate('End');
+                  }
                 }}>
                   <View styl={Styles.orderBtn}>
                     <Text style={Styles.orderBtnText}>
