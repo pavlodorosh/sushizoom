@@ -44,7 +44,7 @@ const CategoryScreen = ({navigation, route}) => {
             </Text>
             <TouchableWithoutFeedback
               onPress={() => {
-                navigation.navigate('Start', {region, city});
+                navigation.navigate('Action', {region, city});
               }}>
               <Image
                 source={require('../../assets/images/_Sushiboom.jpg')}
@@ -54,7 +54,7 @@ const CategoryScreen = ({navigation, route}) => {
             <Text
               style={Styles.categoryTitleAction}
               onPress={() => {
-                navigation.navigate('Start', {region, city});
+                navigation.navigate('Action', {region, city});
               }}>
               АКЦІЇ
             </Text>

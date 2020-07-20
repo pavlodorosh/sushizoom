@@ -1,3 +1,4 @@
+import ActionScreen from './src/screens/ActionScreen';
 import CatalogScreen from './src/screens/CatalogScreen';
 import EndScreen from './src/screens/EndScreen';
 import MainScreen from './src/screens/MainScreen';
@@ -21,6 +22,7 @@ const App = () => {
             showLabel: false,
           }}>
           <Stack.Screen name="Start" component={StartScreen} />
+          <Stack.Screen name="Action" component={ActionScreen} />
           <Stack.Screen name="End" component={EndScreen} />
           <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Order" component={OrderScreen} />

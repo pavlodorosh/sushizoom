@@ -23,7 +23,10 @@ const ProductsScreen = ({navigation, route}) => {
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(documentSnapshot => {
-          setProducts(prevState => [...prevState, documentSnapshot.data()])
+          if(documentSnapshot.data().action){
+            documentSnapshot.data().price = documentSnapshot.data().new_price
+          }
+          setProducts(prevState => [...prevState, documentSnapshot.data()])          
         });
       });
 
