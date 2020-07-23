@@ -81,10 +81,11 @@ const Styles = StyleSheet.create({
   categoryView: {
     alignContent: 'center',
     justifyContent: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   cityListText: {
     marginTop: 10,
+    marginBottom: 10,
     height: 30,
     fontSize: 20,
     color: Colors.white,
@@ -111,7 +112,7 @@ const Styles = StyleSheet.create({
   },
   logoCategory: {
     resizeMode: 'contain',
-    height: 100,
+    height: 200,
     marginTop: '10%',
   },
   logoMain: {
@@ -159,9 +160,17 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
   },
-  selectContainer: {
+  textBtn:{
+    color: Colors.white,
+    paddingVertical: 10,
+    width: 250,
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  textBtnContainer: {
     borderRadius: 50,
     backgroundColor: Colors.red,
+    marginBottom: 20
   },
 });
 

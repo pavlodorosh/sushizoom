@@ -8,13 +8,28 @@ import {
     TouchableWithoutFeedback,
     View,
 } from 'react-native';
+import React, {useEffect, useState} from 'react';
 
-import React from 'react';
 import Styles from '../styles/Styles';
+import firestore from '@react-native-firebase/firestore';
 
 const CatalogScreen = ({navigation, route}) => {
-    const {region} = route.params;
-    const {city} = route.params;
+    const {priceKoef} = route.params;
+    
+    const [categories, setCategories] = useState([])
+    
+    useEffect(() => {
+      setCategories([])
+      const subscriber = firestore()
+        .collection(`Category`)
+        .get()
+        .then(querySnapshot => {          
+          querySnapshot.forEach(documentSnapshot => {
+            setCategories(prevState => [...prevState, documentSnapshot.data()])          
+          });
+        });
+
+    }, []);
   
     return (
       <>
@@ -26,22 +41,33 @@ const CatalogScreen = ({navigation, route}) => {
                 source={require('../../assets/images/logo.png')}
                 style={Styles.logoCategory}
               />
-              <TouchableWithoutFeedback
-                onPress={() => {
-                  navigation.navigate('Products', {region, city, collection: 'SushiSet'});
-                }}>
-                <Image
-                  source={require('../../assets/images/_Sushiboom.jpg')}
-                  style={Styles.categoryImg}
-                />
-              </TouchableWithoutFeedback>
-              <Text
-                style={Styles.categoryTitle}
-                onPress={() => {
-                  navigation.navigate('Products', {region, city, collection: 'SushiSet'});
-                }}>
-                СУШІ СЕТИ
-              </Text>
+              {
+                categories.length > 0 && (
+                  categories.map((cat, index) => {
+                    return (
+                      <View key={index}>
+                         <TouchableWithoutFeedback
+                          onPress={() => {
+                            navigation.navigate('Catalog', {priceKoef});
+                          }}>
+                          <Image
+                            source={{uri: categories[cat].image}}
+                            style={Styles.categoryImg}
+                          />
+                        </TouchableWithoutFeedback>
+                        <Text
+                          style={Styles.categoryTitle}
+                          onPress={() => {
+                            navigation.navigate('Catalog', {priceKoef});
+                          }}>
+                          МЕНЮ
+                        </Text>
+                      </View>
+                    )
+                  })
+                )
+              }
+              
             </View>
           </View>
         </ScrollView>
