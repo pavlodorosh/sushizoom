@@ -1,5 +1,6 @@
 import {
   Image,
+  Linking,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -8,10 +9,12 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import Context from '../context'
+import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
+import phones from '../data/phones'
 
 const CategoryScreen = ({navigation, route}) => {
   
@@ -23,43 +26,29 @@ const CategoryScreen = ({navigation, route}) => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={Styles.body}>
           <View style={Styles.sectionContainer}>
+            <IconCart />
             <Image
               source={require('../../assets/images/logo.png')}
               style={Styles.logoCategory}
             />
-              <TouchableWithoutFeedback
-                onPress={() => {
-                  navigation.navigate('Catalog');
-                }}>
-                <Image
-                  source={require('../../assets/images/_Sushiboom.jpg')}
-                  style={Styles.categoryImg}
-                />
+            <Text style={Styles.categoryCity}>{context.city}</Text>
+            <View style={Styles.textBtnContainer}>
+              <TouchableWithoutFeedback onPress={() => {navigation.navigate('Catalog')}}>
+                <Text style={Styles.textBtn}>Меню</Text>
               </TouchableWithoutFeedback>
-              <Text
-                style={Styles.categoryTitle}
-                onPress={() => {
-                  navigation.navigate('Catalog');
-                }}>
-                МЕНЮ
-              </Text>
-            
-              <TouchableWithoutFeedback
-                onPress={() => {
-                  navigation.navigate('Action');
-                }}>
-                <Image
-                  source={require('../../assets/images/_Sushiboom.jpg')}
-                  style={Styles.categoryImg}
-                />
-              </TouchableWithoutFeedback>
-              <Text
-                style={Styles.categoryTitleAction}
-                onPress={() => {
-                  navigation.navigate('Action');
-                }}>
-                АКЦІЇ
-              </Text>
+            </View>
+            <View style={Styles.buttonsInRow}>              
+              <View style={Styles.textBtnContainer}>
+                <TouchableWithoutFeedback onPress={() => {navigation.navigate('Action')}}>
+                  <Text style={Styles.textBtnAction}>Акції %</Text>
+                </TouchableWithoutFeedback>
+              </View>        
+              <View style={Styles.textBtnContainer}>
+                <TouchableWithoutFeedback onPress={() => {Linking.openURL(`tel:${context.phone}`)}}>
+                  <Text style={Styles.textBtnCall}>Зателефонувати</Text>
+                </TouchableWithoutFeedback>
+              </View>
+            </View>
           </View>
         </View>
       </ScrollView>

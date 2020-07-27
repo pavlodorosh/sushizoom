@@ -8,32 +8,39 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
+import Context from '../context'
+import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
 import firestore from '@react-native-firebase/firestore';
 
 const ProductsScreen = ({navigation, route}) => {
   const [products, setProducts] = useState([])
+  const context = useContext(Context)
 
   useEffect(() => {
     setProducts([])
-    const subscriber = firestore()
-      .collection(`Catalog/c8HZNaeDG6BoFwotRgSa/${route.params.collection}`)
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(documentSnapshot => {
-          if(documentSnapshot.data().action){
-            documentSnapshot.data().price = documentSnapshot.data().new_price
+    firestore()
+    .collection(`Product`)
+    .get()
+    .then(querySnapshot => {   
+      console.log(querySnapshot)      
+      querySnapshot.forEach(documentSnapshot => {
+        let data = documentSnapshot.data()
+        if(data.category == route.params.id){
+          if(data.action){
+            data.price = data.new_price
           }
-          if(route.params.city == 'Київ'){
-            documentSnapshot.data().price = (documentSnapshot.data().price * 1.2).toFixed(0)
+          if(context.city == 'Київ'){
+            data.price = (data.price * 1.2).toFixed(0)
           }
 
-          setProducts(prevState => [...prevState, documentSnapshot.data()])          
-        });
+          setProducts(prevState => [...prevState, data])       
+        }
+   
       });
-
+    });
   }, []);
 
   return (
@@ -42,29 +49,30 @@ const ProductsScreen = ({navigation, route}) => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={Styles.body}>
           <View style={Styles.sectionContainer}>
+            <IconCart />
             <Image
               source={require('../../assets/images/logo.png')}
               style={Styles.logoCategory}
             />
               {                
                 products.length != 0 && (
-                    Object.keys(products).map((item, index) => {
+                    products.map((product, index) => {
                       return (
                         <View style={Styles.categoryProductSection} key={index}>
                           <Image
-                            source={{uri: products[item].img}}
+                            source={{uri: product.image}}
                             style={Styles.categoryProductImage}
                           />
                           <View key={index} style={Styles.categoryProductSectionText}>
-                            <Text style={Styles.categoryProductTitle}>{products[item].name}</Text>
-                            <Text style={Styles.categoryProductTitle}>{products[item].price} ГРН</Text>
-                            <Text style={Styles.categoryProductText}>{products[item].ingredients}</Text>
+                            <Text style={Styles.categoryProductTitle}>{product.name}</Text>
+                            <Text style={Styles.categoryProductTitle}>{product.price} ГРН</Text>
+                            <Text style={Styles.categoryProductText}>{product.ingredients}</Text>
                             <TouchableOpacity onPress={() => {
-                              navigation.navigate('Order', {product: products[item]});
+                              context.cart.push(product.name)
                             }}>
                               <View styl={Styles.categoryProductButton}>
                                 <Text style={Styles.categoryProductButtonText}>
-                                  ЗАМОВИТИ
+                                  В КОШИК
                                 </Text>
                               </View>
                             </TouchableOpacity>

@@ -10,25 +10,25 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 
+import Context from '../context'
+import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
 import firestore from '@react-native-firebase/firestore';
 
-const CatalogScreen = ({navigation, route}) => {
-    const {priceKoef} = route.params;
-    
+const CatalogScreen = ({navigation, route}) => {    
     const [categories, setCategories] = useState([])
     
     useEffect(() => {
       setCategories([])
-      const subscriber = firestore()
+      firestore()
         .collection(`Category`)
         .get()
-        .then(querySnapshot => {          
+        .then(querySnapshot => {   
+          console.log(querySnapshot)      
           querySnapshot.forEach(documentSnapshot => {
             setCategories(prevState => [...prevState, documentSnapshot.data()])          
           });
         });
-
     }, []);
   
     return (
@@ -37,6 +37,7 @@ const CatalogScreen = ({navigation, route}) => {
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           <View style={Styles.body}>
             <View style={Styles.sectionContainer}>
+              <IconCart/>
               <Image
                 source={require('../../assets/images/logo.png')}
                 style={Styles.logoCategory}
@@ -48,19 +49,19 @@ const CatalogScreen = ({navigation, route}) => {
                       <View key={index}>
                          <TouchableWithoutFeedback
                           onPress={() => {
-                            navigation.navigate('Catalog', {priceKoef});
+                            navigation.navigate('Products', {id: cat.id});
                           }}>
                           <Image
-                            source={{uri: categories[cat].image}}
+                            source={{uri: cat.image}}
                             style={Styles.categoryImg}
                           />
                         </TouchableWithoutFeedback>
                         <Text
                           style={Styles.categoryTitle}
                           onPress={() => {
-                            navigation.navigate('Catalog', {priceKoef});
+                            navigation.navigate('Products', {id: cat.id});
                           }}>
-                          МЕНЮ
+                          {cat.name}
                         </Text>
                       </View>
                     )

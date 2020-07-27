@@ -6,6 +6,7 @@ const productCategoryHeight = 'auto'
 const productCategoryHalfWidth = Dimensions.get('window').width / 2 - 20
 const formWidth = Dimensions.get('window').width - 50
 
+
 const Styles = StyleSheet.create({
   body: {
     backgroundColor: Colors.black,
@@ -13,11 +14,38 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     minHeight: Dimensions.get('window').height,
   },
+  buttonsInRow:{
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    width: formWidth
+  },
+  cartIconImage: {    
+    resizeMode: 'contain',
+    width: 38,
+    height: 45,
+    marginTop: 30,
+    paddingVertical: 10,
+  },
+  cartIconText: {
+    color: Colors.white,
+    fontSize: 30,
+    marginLeft: 10,
+  },
+  cartIconWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  categoryCity: {
+    color: Colors.white,
+    marginVertical: 20,
+    fontSize: 30
+  },
   categoryImg: {
     resizeMode: 'contain',
     height: 150,
-    marginTop: 50,
-    marginBottom: 20,
+    width: formWidth,
+    marginTop: 50
   },
   categoryProductButton:{
     alignItems: 'center', 
@@ -71,6 +99,8 @@ const Styles = StyleSheet.create({
     fontSize: 30,
     height: 40,
     fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 10
   },
   categoryTitleAction: {
     color: Colors.red,
@@ -113,12 +143,13 @@ const Styles = StyleSheet.create({
   logoCategory: {
     resizeMode: 'contain',
     height: 200,
-    marginTop: '10%',
+    marginTop: 10,
+    marginBottom: 30
   },
   logoMain: {
     resizeMode: 'contain',
     height: '20%',
-    marginTop: '40%',
+    marginTop: 30,
     marginBottom: 20,
   },
   orderBtn: {
@@ -137,7 +168,7 @@ const Styles = StyleSheet.create({
   },
   sectionContainer: {
     margin: 32,
-    paddingHorizontal: 24,
+    paddingHorizontal: 12,
     justifyContent: 'flex-start',
     alignContent: 'flex-start',
     alignItems: 'center',
@@ -163,9 +194,23 @@ const Styles = StyleSheet.create({
   textBtn:{
     color: Colors.white,
     paddingVertical: 10,
-    width: 250,
+    width: formWidth,
     textAlign: 'center',
     fontSize: 20,
+  },
+  textBtnAction: {
+    color: Colors.white,
+    paddingVertical: 10,
+    paddingHorizontal: 25,
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  textBtnCall:{
+    color: Colors.white,
+    paddingVertical: 10,
+    textAlign: 'center',
+    fontSize: 20,
+    paddingHorizontal: 25,
   },
   textBtnContainer: {
     borderRadius: 50,

@@ -4,32 +4,7 @@ import React, {useContext, useState} from 'react';
 import Context from '../context'
 import {Picker} from '@react-native-community/picker';
 import Styles from '../styles/Styles';
-
-const cities = {
-  rivne: {
-    label: 'Рівненська',
-    arr: [
-      'Рівне',
-      'Здолбунів',
-      'Вараш',
-      'Дубровиця',
-      'Зарічне',
-      'Володимирець',
-    ],
-  },
-  kiev: {
-    label: 'Київська',
-    arr: ['Київ'],
-  },
-  zhutomir: {
-    label: 'Житомирська',
-    arr: ['Новоград-Волинський'],
-  },
-  khmelnitsk: {
-    label: 'Хмельницька',
-    arr: ['Славута', 'Шепетівка'],
-  },
-};
+import cities from '../data/cities'
 
 const StartScreen = ({navigation}) => {
   const [region, setRegion] = useState(null);
@@ -37,7 +12,11 @@ const StartScreen = ({navigation}) => {
 
   const handleCityClick = (city, region) => {
     context.city = city
-    context.region = region
+    phones.forEach(num => {
+      if(num.city == city){
+        context.phone = num.phone
+      }
+    })
     navigation.navigate('Main')
   }
 

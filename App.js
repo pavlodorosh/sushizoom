@@ -14,8 +14,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 const Stack = createStackNavigator();
 const data = {
   city: '',
-  region: '',
-  cart: []  
+  cart: [],
+  phone: null  
 }
 
 const App = () => {
