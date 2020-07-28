@@ -16,8 +16,9 @@ import Styles from '../styles/Styles';
 import firestore from '@react-native-firebase/firestore';
 
 const ProductsScreen = ({navigation, route}) => {
-  const [products, setProducts] = useState([])
   const context = useContext(Context)
+  const [count, setCount] = useState(context.cart.length)
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
     setProducts([])
@@ -48,7 +49,7 @@ const ProductsScreen = ({navigation, route}) => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={Styles.body}>
           <View style={Styles.sectionContainer}>
-            <IconCart />
+            <IconCart count={count}/>
             <Image
               source={require('../../assets/images/logo.png')}
               style={Styles.logoCategory}

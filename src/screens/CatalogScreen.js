@@ -8,14 +8,16 @@ import {
     TouchableWithoutFeedback,
     View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import Context from '../context'
 import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
 import firestore from '@react-native-firebase/firestore';
 
-const CatalogScreen = ({navigation, route}) => {    
+const CatalogScreen = ({navigation, route}) => {   
+    const context = useContext(Context) 
+    const [count, setCount] = useState(context.cart.length)
     const [categories, setCategories] = useState([])
     
     useEffect(() => {
@@ -30,6 +32,10 @@ const CatalogScreen = ({navigation, route}) => {
           });
         });
     }, []);
+
+    useEffect(() => {
+      setCount(context.cart.length)
+    })
   
     return (
       <>
@@ -37,7 +43,7 @@ const CatalogScreen = ({navigation, route}) => {
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           <View style={Styles.body}>
             <View style={Styles.sectionContainer}>
-              <IconCart/>
+              {/* <IconCart count={count}/> */}
               <Image
                 source={require('../../assets/images/logo.png')}
                 style={Styles.logoCategory}

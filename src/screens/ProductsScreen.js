@@ -16,8 +16,9 @@ import Styles from '../styles/Styles';
 import firestore from '@react-native-firebase/firestore';
 
 const ProductsScreen = ({navigation, route}) => {
-  const [products, setProducts] = useState([])
   const context = useContext(Context)
+  const [count, setCount] = useState(context.cart.length)
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
     setProducts([])
@@ -43,13 +44,35 @@ const ProductsScreen = ({navigation, route}) => {
     });
   }, []);
 
+  const addToCart = (el) => {
+    setCount(prev => prev + 1)
+
+    let canPush = true
+
+    context.cart.forEach(prod => {
+      if(prod.name == el.name){
+        prod.count++
+        canPush = false
+      }
+    })
+
+    if(canPush){
+      el.count = 1
+      context.cart.push(el)
+    }
+  }
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={Styles.body}>
           <View style={Styles.sectionContainer}>
-            <IconCart />
+            <TouchableOpacity onPress={() => {
+              navigation.navigate('Order')
+            }}>
+            <IconCart count={count}/>
+            </TouchableOpacity>
             <Image
               source={require('../../assets/images/logo.png')}
               style={Styles.logoCategory}
@@ -68,7 +91,7 @@ const ProductsScreen = ({navigation, route}) => {
                             <Text style={Styles.categoryProductTitle}>{product.price} ГРН</Text>
                             <Text style={Styles.categoryProductText}>{product.ingredients}</Text>
                             <TouchableOpacity onPress={() => {
-                              context.cart.push(product.name)
+                              addToCart(product)
                             }}>
                               <View styl={Styles.categoryProductButton}>
                                 <Text style={Styles.categoryProductButtonText}>

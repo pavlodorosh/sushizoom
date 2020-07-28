@@ -10,12 +10,14 @@ import {
     UselessTextInput,
     View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
+import Context from '../context'
 import Styles from '../styles/Styles';
 import Telegram from 'telegram-send-message'
 
 const OrderScreen = ({navigation, route}) => {
+    const { cart } = useContext(Context)
 
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
@@ -23,15 +25,15 @@ const OrderScreen = ({navigation, route}) => {
     const [comment, setComment] = useState('')
   
     useEffect(() => {
-        console.log(route.params.product)
+      console.log(cart)
     }, []);
 
     const sendMessage = () => {
-      let message = `Нове замовлення! Імя: ${name}, Телефон: ${phone}, Адреса: ${address}, Коментар: ${comment}, Товар: ${route.params.product.name}`
+      // let message = `Нове замовлення! Імя: ${name}, Телефон: ${phone}, Адреса: ${address}, Коментар: ${comment}, Товар: ${route.params.product.name}`
 
       Telegram.setToken('868514272:AAH6bAavjGQHH-bztp9Buu1ugozGVfNCgl0');
       Telegram.setRecipient(490328195);
-      Telegram.setMessage(message);
+      Telegram.setMessage('fd');
       Telegram.send();
     }
   

@@ -5,6 +5,7 @@ import Context from '../context'
 import {Picker} from '@react-native-community/picker';
 import Styles from '../styles/Styles';
 import cities from '../data/cities'
+import phones from '../data/phones'
 
 const StartScreen = ({navigation}) => {
   const [region, setRegion] = useState(null);

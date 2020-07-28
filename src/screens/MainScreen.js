@@ -14,11 +14,11 @@ import React, {useContext, useEffect, useState} from 'react';
 import Context from '../context'
 import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
-import phones from '../data/phones'
 
 const CategoryScreen = ({navigation, route}) => {
-  
   const context = useContext(Context)
+  const [count, setCount] = useState(context.cart.length)
+  
 
   return (
     <>
@@ -26,7 +26,7 @@ const CategoryScreen = ({navigation, route}) => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={Styles.body}>
           <View style={Styles.sectionContainer}>
-            <IconCart />
+            {/* <IconCart count={count}/> */}
             <Image
               source={require('../../assets/images/logo.png')}
               style={Styles.logoCategory}

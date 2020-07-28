@@ -1,18 +1,13 @@
 import {
   Image,
-  SafeAreaView,
-  StatusBar,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useContext, useState} from 'react';
 
-import Context from '../context';
+import React from 'react';
 import Styles from '../styles/Styles';
 
-const IconCart = () => {
-  const context = useContext(Context);
+const IconCart = ({ count }) => {
   return (
     <>
       <View style={Styles.cartIconWrapper}>
@@ -20,7 +15,7 @@ const IconCart = () => {
           source={require('../../assets/images/cart-icon.png')}
           style={Styles.cartIconImage}
         />
-        <Text style={Styles.cartIconText}>{context.cart.length}</Text>
+        <Text style={Styles.cartIconText}>{count}</Text>
       </View>
     </>
   );
