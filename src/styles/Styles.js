@@ -221,7 +221,7 @@ const Styles = StyleSheet.create({
   },
   logoCategory: {
     resizeMode: 'contain',
-    height: 200,
+    height: 170,
     marginTop: 10,
     marginBottom: 30,
   },
