@@ -17,7 +17,7 @@ import firestore from '@react-native-firebase/firestore';
 
 const ProductsScreen = ({navigation, route}) => {
   const context = useContext(Context)
-  const [count, setCount] = useState(context.cart.length)
+  const [count, setCount] = useState(context.cartCount)
   const [products, setProducts] = useState([])
 
   useEffect(() => {
@@ -25,8 +25,7 @@ const ProductsScreen = ({navigation, route}) => {
     firestore()
     .collection(`Product`)
     .get()
-    .then(querySnapshot => {   
-      console.log(querySnapshot)      
+    .then(querySnapshot => {     
       querySnapshot.forEach(documentSnapshot => {
         let data = documentSnapshot.data()
         if(data.category == route.params.id){
@@ -60,6 +59,8 @@ const ProductsScreen = ({navigation, route}) => {
       el.count = 1
       context.cart.push(el)
     }
+
+    context.cartCount++
   }
 
   return (

@@ -15,6 +15,7 @@ const Stack = createStackNavigator();
 const data = {
   city: '',
   cart: [],
+  cartCount: 0,
   phone: null  
 }
 

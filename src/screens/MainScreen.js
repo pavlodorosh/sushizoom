@@ -17,7 +17,7 @@ import Styles from '../styles/Styles';
 
 const CategoryScreen = ({navigation, route}) => {
   const context = useContext(Context)
-  const [count, setCount] = useState(context.cart.length)
+  const [count, setCount] = useState(context.cartCount)
   
 
   return (

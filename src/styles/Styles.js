@@ -2,10 +2,9 @@ import {Dimensions, StyleSheet} from 'react-native';
 
 import Colors from './Colors';
 
-const productCategoryHeight = 'auto'
-const productCategoryHalfWidth = Dimensions.get('window').width / 2 - 20
-const formWidth = Dimensions.get('window').width - 50
-
+const productCategoryHeight = 'auto';
+const productCategoryHalfWidth = Dimensions.get('window').width / 2 - 20;
+const formWidth = Dimensions.get('window').width - 50;
 
 const Styles = StyleSheet.create({
   body: {
@@ -14,12 +13,12 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     minHeight: Dimensions.get('window').height,
   },
-  buttonsInRow:{
+  buttonsInRow: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    width: formWidth
+    width: formWidth,
   },
-  cartIconImage: {    
+  cartIconImage: {
     resizeMode: 'contain',
     width: 38,
     height: 45,
@@ -34,22 +33,79 @@ const Styles = StyleSheet.create({
   cartIconWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+  },
+  cartItem: {
+    height: 80,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    width: formWidth,
+    marginBottom: 20
+  },
+  cartItems: {
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.light
+  },
+  cartItemBottomWrapper: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
+  cartItemCount: {
+    color: Colors.light,
+    fontSize: 22,
+    marginHorizontal: 15
+  },
+  cartItemImage: {
+    resizeMode: 'contain',
+    width: 100,
+  },
+  cartItemMinMaxBtn: {
+    color: Colors.light,
+    fontSize: 14,
+    borderColor: Colors.light,
+    borderWidth: 1,
+    borderRadius: 50,
+    width: 20,
+    height: 20,
+    lineHeight: 20,
+    textAlign: 'center'
+  },
+  cartItemMinMaxWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  cartItemName: {
+    color: Colors.white,
+    fontSize: 22,
+  },
+  cartItemRemove: {
+    width: 25,
+    resizeMode: 'contain'
+  },
+  cartItemNameWrapper: {
+    flexDirection: 'column'
+  },
+  cartItemPrice: {
+    color: Colors.light,
+    fontSize: 25,
+    marginLeft: 20
   },
   categoryCity: {
     color: Colors.white,
     marginVertical: 20,
-    fontSize: 30
+    fontSize: 30,
   },
   categoryImg: {
     resizeMode: 'contain',
     height: 150,
     width: formWidth,
-    marginTop: 50
+    marginTop: 50,
   },
-  categoryProductButton:{
-    alignItems: 'center', 
-    justifyContent: 'center', 
+  categoryProductButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   categoryProductButtonText: {
     color: Colors.white,
@@ -57,25 +113,25 @@ const Styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 5,
     borderRadius: 50,
-    marginTop: 10
+    marginTop: 10,
   },
   categoryProductImage: {
     resizeMode: 'contain',
     position: 'relative',
     width: productCategoryHalfWidth + 30,
-    height: 180
+    height: 180,
   },
   categoryProductTitle: {
     color: Colors.white,
     fontSize: 20,
     fontWeight: 'bold',
-    width: productCategoryHalfWidth
+    width: productCategoryHalfWidth,
   },
   categoryProductText: {
     color: Colors.white,
     fontSize: 12,
     width: productCategoryHalfWidth,
-    marginTop: 5
+    marginTop: 5,
   },
   categoryProductSection: {
     flexDirection: 'row',
@@ -86,13 +142,13 @@ const Styles = StyleSheet.create({
     borderBottomColor: Colors.dark,
     borderBottomWidth: 2,
   },
-  categoryProductSectionText:{
+  categoryProductSectionText: {
     flexDirection: 'column',
     alignItems: 'center',
     alignContent: 'center',
     marginLeft: 10,
     paddingBottom: 10,
-    height: productCategoryHeight
+    height: productCategoryHeight,
   },
   categoryTitle: {
     color: Colors.white,
@@ -100,7 +156,7 @@ const Styles = StyleSheet.create({
     height: 40,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginVertical: 10
+    marginVertical: 10,
   },
   categoryTitleAction: {
     color: Colors.red,
@@ -120,14 +176,37 @@ const Styles = StyleSheet.create({
     fontSize: 20,
     color: Colors.white,
   },
+  chopsticksBlock: {
+    marginRight: 20
+  },
+  chopsticksImage: {
+    height: 80,
+    resizeMode: 'contain',
+    width: 80
+  },
+  chopsticksImages: {
+    flexDirection: 'row'
+  },
+  chopsticksImageText: {
+    color: Colors.white,
+    width: 80
+  },
+  chopsticksText: {
+    color: Colors.white,
+    fontSize: 18
+  },
+  chopsticksWrapper: {
+    flexDirection: 'column',
+    width: formWidth
+  },
   endText: {
     color: Colors.white,
     backgroundColor: 'transparent',
-    fontSize: 24
+    fontSize: 24,
     // bac
   },
   form: {
-    marginTop: 30
+    marginTop: 30,
   },
   input: {
     borderBottomColor: Colors.light,
@@ -138,13 +217,13 @@ const Styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     height: 50,
-    marginBottom: 10
+    marginBottom: 10,
   },
   logoCategory: {
     resizeMode: 'contain',
     height: 200,
     marginTop: 10,
-    marginBottom: 30
+    marginBottom: 30,
   },
   logoMain: {
     resizeMode: 'contain',
@@ -153,9 +232,9 @@ const Styles = StyleSheet.create({
     marginBottom: 20,
   },
   orderBtn: {
-    alignItems: 'center', 
-    justifyContent: 'center', 
-    width: '100%'
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
   },
   orderBtnText: {
     color: Colors.white,
@@ -191,7 +270,14 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
   },
-  textBtn:{
+  sumText: {
+    color: Colors.white,
+    textAlign: 'right',
+    width: formWidth,
+    fontSize: 26,
+    marginVertical: 15
+  },
+  textBtn: {
     color: Colors.white,
     paddingVertical: 10,
     width: formWidth,
@@ -205,7 +291,7 @@ const Styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
   },
-  textBtnCall:{
+  textBtnCall: {
     color: Colors.white,
     paddingVertical: 10,
     textAlign: 'center',
@@ -215,7 +301,7 @@ const Styles = StyleSheet.create({
   textBtnContainer: {
     borderRadius: 50,
     backgroundColor: Colors.red,
-    marginBottom: 20
+    marginBottom: 20,
   },
 });
 

@@ -17,7 +17,7 @@ import firestore from '@react-native-firebase/firestore';
 
 const CatalogScreen = ({navigation, route}) => {   
     const context = useContext(Context) 
-    const [count, setCount] = useState(context.cart.length)
+    const [count, setCount] = useState(context.cartCount)
     const [categories, setCategories] = useState([])
     
     useEffect(() => {
@@ -33,9 +33,6 @@ const CatalogScreen = ({navigation, route}) => {
         });
     }, []);
 
-    useEffect(() => {
-      setCount(context.cart.length)
-    })
   
     return (
       <>

@@ -15,7 +15,7 @@ const IconCart = ({ count }) => {
           source={require('../../assets/images/cart-icon.png')}
           style={Styles.cartIconImage}
         />
-        <Text style={Styles.cartIconText}>{count}</Text>
+        {/* <Text style={Styles.cartIconText}>{count}</Text> */}
       </View>
     </>
   );
