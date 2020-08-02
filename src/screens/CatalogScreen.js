@@ -5,6 +5,7 @@ import {
     StatusBar,
     StyleSheet,
     Text,
+    TouchableOpacity,
     TouchableWithoutFeedback,
     View,
 } from 'react-native';
@@ -13,9 +14,11 @@ import React, {useEffect, useState} from 'react';
 import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
 import firestore from '@react-native-firebase/firestore';
+import { useSelector } from 'react-redux'
 
 const CatalogScreen = ({navigation, route}) => {   
     const [categories, setCategories] = useState([])
+    const state = useSelector(state => state)
     
     useEffect(() => {
       setCategories([])
@@ -37,7 +40,11 @@ const CatalogScreen = ({navigation, route}) => {
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           <View style={Styles.body}>
             <View style={Styles.sectionContainer}>
-              {/* <IconCart count={count}/> */}
+              <TouchableOpacity onPress={() => {
+                navigation.navigate('Order')
+              }}>
+                <IconCart count={state.data.cartCount}/>
+              </TouchableOpacity>
               <Image
                 source={require('../../assets/images/logo.png')}
                 style={Styles.logoCategory}

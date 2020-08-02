@@ -4,15 +4,16 @@ import React, {useState} from 'react';
 import {Picker} from '@react-native-community/picker';
 import Styles from '../styles/Styles';
 import cities from '../data/cities'
-import phones from '../data/phones'
+import { useDispatch } from 'react-redux'
 
 const StartScreen = ({navigation}) => {
   const [region, setRegion] = useState(null);
-  const handleCityClick = (city, region) => {
-    phones.forEach(num => {
-      if(num.city == city){
-        
-      }
+  const dispatch = useDispatch()
+
+  const handleCityClick = city => {
+    dispatch({
+      type: 'CITY_HANDLE_CLICK',
+      value: city
     })
     navigation.navigate('Main')
   }

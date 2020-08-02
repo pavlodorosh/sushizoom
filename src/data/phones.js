@@ -1,7 +1,7 @@
 export default phones = [
     {
       city: 'Рівне',
-      phone: '+380989999999'
+      phone: '+380989999111'
     },
     {
       city: 'Здолбунів',

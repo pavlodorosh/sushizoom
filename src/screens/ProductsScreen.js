@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 
 import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
@@ -16,6 +17,9 @@ import firestore from '@react-native-firebase/firestore';
 
 const ProductsScreen = ({navigation, route}) => {
   const [products, setProducts] = useState([])
+  
+  const state = useSelector(state => state)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     setProducts([])
@@ -41,23 +45,12 @@ const ProductsScreen = ({navigation, route}) => {
   }, []);
 
   const addToCart = (el) => {
-    // setCount(prev => prev + 1)
+    dispatch({
+      type: 'ADD_TO_CART',
+      value: el
+    })
 
-    let canPush = true
-
-    // context.cart.forEach(prod => {
-    //   if(prod.name == el.name){
-    //     prod.count++
-    //     canPush = false
-    //   }
-    // })
-
-    // if(canPush){
-    //   el.count = 1
-    //   context.cart.push(el)
-    // }
-
-    // context.cartCount++
+    
   }
 
   return (
@@ -69,7 +62,7 @@ const ProductsScreen = ({navigation, route}) => {
             <TouchableOpacity onPress={() => {
               navigation.navigate('Order')
             }}>
-            <IconCart count={5}/>
+              <IconCart count={state.data.cartCount}/>
             </TouchableOpacity>
             <Image
               source={require('../../assets/images/logo.png')}

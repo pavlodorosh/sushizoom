@@ -8,16 +8,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import Context from '../context'
 import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
 import firestore from '@react-native-firebase/firestore';
 
 const ProductsScreen = ({navigation, route}) => {
-  const context = useContext(Context)
-  const [count, setCount] = useState(context.cart.length)
   const [products, setProducts] = useState([])
 
   useEffect(() => {
@@ -32,9 +29,9 @@ const ProductsScreen = ({navigation, route}) => {
         if(data.action){
           data.price = data.new_price
           
-          if(context.city == 'Київ'){
-            data.price = (data.price * 1.2).toFixed(0)
-          }
+          // if(context.city == 'Київ'){
+          //   data.price = (data.price * 1.2).toFixed(0)
+          // }
 
           setProducts(prevState => [...prevState, data])       
         }
@@ -49,7 +46,11 @@ const ProductsScreen = ({navigation, route}) => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={Styles.body}>
           <View style={Styles.sectionContainer}>
-            <IconCart count={count}/>
+            <TouchableOpacity onPress={() => {
+              navigation.navigate('Order')
+            }}>
+              <IconCart count={state.data.cartCount}/>
+            </TouchableOpacity>
             <Image
               source={require('../../assets/images/logo.png')}
               style={Styles.logoCategory}

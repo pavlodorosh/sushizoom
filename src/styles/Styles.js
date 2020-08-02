@@ -14,7 +14,7 @@ const Styles = StyleSheet.create({
     minHeight: Dimensions.get('window').height,
   },
   buttonsInRow: {
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     flexDirection: 'row',
     width: formWidth,
   },
@@ -95,7 +95,7 @@ const Styles = StyleSheet.create({
   categoryCity: {
     color: Colors.white,
     marginVertical: 20,
-    fontSize: 30,
+    fontSize: 26,
   },
   categoryImg: {
     resizeMode: 'contain',
@@ -280,7 +280,7 @@ const Styles = StyleSheet.create({
   textBtn: {
     color: Colors.white,
     paddingVertical: 10,
-    width: formWidth,
+    width: formWidth - 50,
     textAlign: 'center',
     fontSize: 20,
   },

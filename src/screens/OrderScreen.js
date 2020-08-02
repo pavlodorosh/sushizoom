@@ -11,8 +11,8 @@ import {
   UselessTextInput,
   View,
 } from 'react-native';
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import React, {useEffect, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 
 import Styles from '../styles/Styles';
 import Telegram from 'telegram-send-message';
@@ -21,12 +21,14 @@ const OrderScreen = ({navigation, route}) => {
   const [cart_this, setCart] = useState([]);
   const [sum, setSum] = useState(999);
   
-  const [delivery, setDelivery] = React.useState('first');
   const [name, setName] = useState('');
   const [empty, isEmpty] = useState(true);
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [comment, setComment] = useState('');
+  
+  const state = useSelector(state => state)
+  const dispatch = useDispatch()
 
   const radio_props = [
     {label: 'Доставка за Вашою адресою ', value: 0 },
@@ -34,10 +36,10 @@ const OrderScreen = ({navigation, route}) => {
   ];
 
   useEffect(() => {
-    // setCart(context.cart);
-    // if(context.cart.length > 0){
-    //   isEmpty(false)
-    // }
+    setCart(state.data.cart);
+    if(state.data.cart.length > 0){
+      isEmpty(false)
+    }
   }, []);
 
   const sendMessage = () => {
@@ -49,31 +51,6 @@ const OrderScreen = ({navigation, route}) => {
     Telegram.send();
   };
 
-  const decreaseCount = (index) => {
-    if(cart_this[index].count > 1){
-      setCart(prev => {
-        let newArr = prev
-        newArr[index].count = newArr[index].count - 1
-        return newArr
-      })
-    }
-  }
-  
-  const increaseCount = (index) => {
-    setCart(prev => {
-      let newArr = prev
-      newArr[index].count = newArr[index].count + 1
-      return newArr
-    })
-  }
-
-  const removeItem = (name) => {
-    setCart(prev => {
-      let newArr = prev.filter(item => item.name != name)
-      return newArr
-    })
-    context.cart = context.cart.filter(item => item.name != name)
-  }
 
   return (
     <>
@@ -91,9 +68,9 @@ const OrderScreen = ({navigation, route}) => {
                     if(item.action){
                       item.price = item.new_price
                     }
-                    // if(context.city == 'Київ'){
-                    //   item.price = (item.price * 1.2).toFixed(0)
-                    // }              
+                    if(state.data.city == 'Київ'){
+                      item.price = (item.price * 1.2).toFixed(0)
+                    }              
                     return (
                       <View key={index} style={Styles.cartItem}>
                         <Image
@@ -104,18 +81,18 @@ const OrderScreen = ({navigation, route}) => {
                           <Text style={Styles.cartItemName}>{item.name}</Text>
                           <View style={Styles.cartItemBottomWrapper}>
                             <View style={Styles.cartItemMinMaxWrapper}>
-                              <TouchableWithoutFeedback onPress={()=>{decreaseCount(index)}}>
+                              <TouchableWithoutFeedback onPress={()=>{}}>
                                 <Text style={Styles.cartItemMinMaxBtn}>-</Text>
                               </TouchableWithoutFeedback>
                               <Text style={Styles.cartItemCount}>{item.count}</Text>
-                              <TouchableWithoutFeedback onPress={()=>{increaseCount(index)}}>
+                              <TouchableWithoutFeedback onPress={()=>{}}>
                                 <Text style={Styles.cartItemMinMaxBtn}>+</Text>
                               </TouchableWithoutFeedback>
                             </View>
                             <Text style={Styles.cartItemPrice}>{item.price * item.count} грн</Text>
                           </View>
                         </View>
-                        <TouchableWithoutFeedback onPress={()=>{removeItem(item.name)}}>
+                        <TouchableWithoutFeedback onPress={()=>{}}>
                           <Image
                             source={require('../../assets/images/arrows_circle_remove.png')}
                             style={Styles.cartItemRemove}
