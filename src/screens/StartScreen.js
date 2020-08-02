@@ -1,7 +1,6 @@
 import {Image, SafeAreaView, StatusBar, Text, TouchableOpacity, View} from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 
-import Context from '../context'
 import {Picker} from '@react-native-community/picker';
 import Styles from '../styles/Styles';
 import cities from '../data/cities'
@@ -9,13 +8,10 @@ import phones from '../data/phones'
 
 const StartScreen = ({navigation}) => {
   const [region, setRegion] = useState(null);
-  const context = useContext(Context)
-
   const handleCityClick = (city, region) => {
-    context.city = city
     phones.forEach(num => {
       if(num.city == city){
-        context.phone = num.phone
+        
       }
     })
     navigation.navigate('Main')

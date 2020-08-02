@@ -12,14 +12,12 @@ import {
   View,
 } from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import Context from '../context';
 import Styles from '../styles/Styles';
 import Telegram from 'telegram-send-message';
 
 const OrderScreen = ({navigation, route}) => {
-  const context = useContext(Context);
   const [cart_this, setCart] = useState([]);
   const [sum, setSum] = useState(999);
   
@@ -36,10 +34,10 @@ const OrderScreen = ({navigation, route}) => {
   ];
 
   useEffect(() => {
-    setCart(context.cart);
-    if(context.cart.length > 0){
-      isEmpty(false)
-    }
+    // setCart(context.cart);
+    // if(context.cart.length > 0){
+    //   isEmpty(false)
+    // }
   }, []);
 
   const sendMessage = () => {

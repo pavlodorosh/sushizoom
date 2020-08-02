@@ -8,16 +8,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import Context from '../context'
 import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
 import firestore from '@react-native-firebase/firestore';
 
 const ProductsScreen = ({navigation, route}) => {
-  const context = useContext(Context)
-  const [count, setCount] = useState(context.cartCount)
   const [products, setProducts] = useState([])
 
   useEffect(() => {
@@ -32,9 +29,9 @@ const ProductsScreen = ({navigation, route}) => {
           if(data.action){
             data.price = data.new_price
           }
-          if(context.city == 'Київ'){
-            data.price = (data.price * 1.2).toFixed(0)
-          }
+          // if(context.city == 'Київ'){
+          //   data.price = (data.price * 1.2).toFixed(0)
+          // }
 
           setProducts(prevState => [...prevState, data])       
         }
@@ -44,23 +41,23 @@ const ProductsScreen = ({navigation, route}) => {
   }, []);
 
   const addToCart = (el) => {
-    setCount(prev => prev + 1)
+    // setCount(prev => prev + 1)
 
     let canPush = true
 
-    context.cart.forEach(prod => {
-      if(prod.name == el.name){
-        prod.count++
-        canPush = false
-      }
-    })
+    // context.cart.forEach(prod => {
+    //   if(prod.name == el.name){
+    //     prod.count++
+    //     canPush = false
+    //   }
+    // })
 
-    if(canPush){
-      el.count = 1
-      context.cart.push(el)
-    }
+    // if(canPush){
+    //   el.count = 1
+    //   context.cart.push(el)
+    // }
 
-    context.cartCount++
+    // context.cartCount++
   }
 
   return (
@@ -72,7 +69,7 @@ const ProductsScreen = ({navigation, route}) => {
             <TouchableOpacity onPress={() => {
               navigation.navigate('Order')
             }}>
-            <IconCart count={count}/>
+            <IconCart count={5}/>
             </TouchableOpacity>
             <Image
               source={require('../../assets/images/logo.png')}
