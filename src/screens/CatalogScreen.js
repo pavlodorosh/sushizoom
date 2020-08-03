@@ -18,7 +18,7 @@ import { useSelector } from 'react-redux'
 
 const CatalogScreen = ({navigation, route}) => {   
     const [categories, setCategories] = useState([])
-    const state = useSelector(state => state)
+    const state = useSelector(state => state, [])
     
     useEffect(() => {
       setCategories([])

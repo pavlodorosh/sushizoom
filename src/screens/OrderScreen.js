@@ -19,7 +19,7 @@ import Telegram from 'telegram-send-message';
 
 const OrderScreen = ({navigation, route}) => {
   const [cart_this, setCart] = useState([]);
-  const [sum, setSum] = useState(999);
+  const [sum, setSum] = useState(0);
   
   const [name, setName] = useState('');
   const [empty, isEmpty] = useState(true);
@@ -27,7 +27,7 @@ const OrderScreen = ({navigation, route}) => {
   const [address, setAddress] = useState('');
   const [comment, setComment] = useState('');
   
-  const state = useSelector(state => state)
+  const state = useSelector(state => state, [])
   const dispatch = useDispatch()
 
   const radio_props = [
@@ -40,21 +40,54 @@ const OrderScreen = ({navigation, route}) => {
     if(state.data.cart.length > 0){
       isEmpty(false)
     }
+    console.log(cart_this)
   }, []);
 
   const sendMessage = () => {
     // let message = `Нове замовлення! Імя: ${name}, Телефон: ${phone}, Адреса: ${address}, Коментар: ${comment}, Товар: ${route.params.product.name}`
-
     Telegram.setToken('868514272:AAH6bAavjGQHH-bztp9Buu1ugozGVfNCgl0');
     Telegram.setRecipient(490328195);
     Telegram.setMessage('fd');
     Telegram.send();
   };
 
+  const getSum = (products) => {
+    let value = 0
+    products.forEach(item => {
+      value += (item.price * state.data.priceKoefficient).toFixed(0) * item.count
+    });
+    return value
+  }
+
+  const deleteItem = (idx) => {
+    dispatch({
+      type: 'DELETE_FROM_CART',
+      value: idx
+    })
+    setCart(state.data.cart)
+    if(state.data.cart.length > 0){
+      isEmpty(false)
+    } else {
+      isEmpty(true)
+    }
+  }
+
+  const increaseCount = (idx) => {
+    dispatch({
+      type: 'INCREASE_COUNT',
+      value: idx
+    })
+  }
+
+  const decreaseCount = (idx) => {
+    dispatch({
+      type: 'DECREASE_COUNT',
+      value: idx
+    })
+  }
 
   return (
     <>
-
       <ScrollView>
         <View style={Styles.body}>
           { !empty && (
@@ -67,10 +100,7 @@ const OrderScreen = ({navigation, route}) => {
                   {cart_this.map((item, index) => {
                     if(item.action){
                       item.price = item.new_price
-                    }
-                    if(state.data.city == 'Київ'){
-                      item.price = (item.price * 1.2).toFixed(0)
-                    }              
+                    }           
                     return (
                       <View key={index} style={Styles.cartItem}>
                         <Image
@@ -81,18 +111,18 @@ const OrderScreen = ({navigation, route}) => {
                           <Text style={Styles.cartItemName}>{item.name}</Text>
                           <View style={Styles.cartItemBottomWrapper}>
                             <View style={Styles.cartItemMinMaxWrapper}>
-                              <TouchableWithoutFeedback onPress={()=>{}}>
+                              <TouchableWithoutFeedback onPress={()=>{decreaseCount(index)}}>
                                 <Text style={Styles.cartItemMinMaxBtn}>-</Text>
                               </TouchableWithoutFeedback>
                               <Text style={Styles.cartItemCount}>{item.count}</Text>
-                              <TouchableWithoutFeedback onPress={()=>{}}>
+                              <TouchableWithoutFeedback onPress={()=>{increaseCount(index)}}>
                                 <Text style={Styles.cartItemMinMaxBtn}>+</Text>
                               </TouchableWithoutFeedback>
                             </View>
-                            <Text style={Styles.cartItemPrice}>{item.price * item.count} грн</Text>
+                            <Text style={Styles.cartItemPrice}>{(item.price * state.data.priceKoefficient).toFixed(0) * item.count} грн</Text>
                           </View>
                         </View>
-                        <TouchableWithoutFeedback onPress={()=>{}}>
+                        <TouchableWithoutFeedback onPress={()=>{deleteItem(index)}}>
                           <Image
                             source={require('../../assets/images/arrows_circle_remove.png')}
                             style={Styles.cartItemRemove}
@@ -102,7 +132,11 @@ const OrderScreen = ({navigation, route}) => {
                     );
                   })}
                 </View>
-                <Text style={Styles.sumText}>Сума: {sum} грн</Text>
+                {
+                  cart_this.length > 0 && (
+                    <Text style={Styles.sumText}>Сума: {getSum(cart_this)} грн</Text>
+                  )
+                }
 
                 <View style={Styles.chopsticksWrapper}>
                   <Text style={Styles.chopsticksText}>Які палички вам найбільше підходять?</Text>

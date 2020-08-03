@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 
 import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
@@ -16,29 +17,33 @@ import firestore from '@react-native-firebase/firestore';
 
 const ProductsScreen = ({navigation, route}) => {
   const [products, setProducts] = useState([])
+  
+  const state = useSelector(state => state, [])
+  const dispatch = useDispatch()
 
   useEffect(() => {
     setProducts([])
     firestore()
     .collection(`Product`)
     .get()
-    .then(querySnapshot => {   
-      console.log(querySnapshot)      
+    .then(querySnapshot => {     
       querySnapshot.forEach(documentSnapshot => {
         let data = documentSnapshot.data()
         if(data.action){
           data.price = data.new_price
-          
-          // if(context.city == 'Київ'){
-          //   data.price = (data.price * 1.2).toFixed(0)
-          // }
-
-          setProducts(prevState => [...prevState, data])       
+          setProducts(prevState => [...prevState, data])    
         }
-   
       });
     });
   }, []);
+
+  const addToCart = (el) => {
+    dispatch({
+      type: 'ADD_TO_CART',
+      value: el
+    })
+    
+  }
 
   return (
     <>
@@ -69,7 +74,7 @@ const ProductsScreen = ({navigation, route}) => {
                             <Text style={Styles.categoryProductTitle}>{product.price} ГРН</Text>
                             <Text style={Styles.categoryProductText}>{product.ingredients}</Text>
                             <TouchableOpacity onPress={() => {
-                              context.cart.push(product.name)
+                              addToCart(product)
                             }}>
                               <View styl={Styles.categoryProductButton}>
                                 <Text style={Styles.categoryProductButtonText}>

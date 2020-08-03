@@ -19,7 +19,7 @@ import { useSelector } from 'react-redux'
 
 const CategoryScreen = ({navigation, route}) => {
 
-  const state = useSelector(state => state)
+  const state = useSelector(state => state, [])
 
   return (
     <>

@@ -1,4 +1,4 @@
-import {Image, SafeAreaView, StatusBar, Text, TouchableOpacity, View} from 'react-native';
+import {Image, SafeAreaView, ScrollView, StatusBar, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 
 import {Picker} from '@react-native-community/picker';
@@ -21,6 +21,7 @@ const StartScreen = ({navigation}) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
       <View style={Styles.body}>
         <View style={Styles.sectionContainer}>
           <Image
@@ -37,18 +38,23 @@ const StartScreen = ({navigation}) => {
                   </TouchableOpacity>
                 </View>
                 <View style={Styles.textBtnContainer}>
-                  <TouchableOpacity onPress={() => {handleCityClick('Київ', 'Київська')}}>
-                    <Text style={Styles.textBtn}>Київ</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={Styles.textBtnContainer}>
                   <TouchableOpacity onPress={() => {setRegion('zhutomir')}}>
                     <Text style={Styles.textBtn}>Житомирська область</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={Styles.textBtnContainer}>
+                  <TouchableOpacity onPress={() => {setRegion('ternopil')}}>
+                    <Text style={Styles.textBtn}>Тернопільська область</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={Styles.textBtnContainer}>
                   <TouchableOpacity onPress={() => {setRegion('khmelnitsk')}}>
                     <Text style={Styles.textBtn}>Хмельницька область</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={Styles.textBtnContainer}>
+                  <TouchableOpacity onPress={() => {handleCityClick('Київ', 'Київська')}}>
+                    <Text style={Styles.textBtn}>Київ</Text>
                   </TouchableOpacity>
                 </View>
               </>
@@ -72,6 +78,7 @@ const StartScreen = ({navigation}) => {
           }
         </View>
       </View>
+      </ScrollView>
     </>
   );
 };

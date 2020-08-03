@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 
 import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
@@ -18,7 +18,7 @@ import firestore from '@react-native-firebase/firestore';
 const ProductsScreen = ({navigation, route}) => {
   const [products, setProducts] = useState([])
   
-  const state = useSelector(state => state)
+  const state = useSelector(state => state, [])
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -33,10 +33,6 @@ const ProductsScreen = ({navigation, route}) => {
           if(data.action){
             data.price = data.new_price
           }
-          // if(context.city == 'Київ'){
-          //   data.price = (data.price * 1.2).toFixed(0)
-          // }
-
           setProducts(prevState => [...prevState, data])       
         }
    
@@ -49,7 +45,6 @@ const ProductsScreen = ({navigation, route}) => {
       type: 'ADD_TO_CART',
       value: el
     })
-
     
   }
 
