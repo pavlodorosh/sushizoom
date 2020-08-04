@@ -21,11 +21,12 @@ const OrderScreen = ({navigation, route}) => {
   const [cart_this, setCart] = useState([]);
   const [sum, setSum] = useState(0);
   
-  const [name, setName] = useState('');
   const [empty, isEmpty] = useState(true);
+  const [person, setPerson] = useState('');
+  const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [comment, setComment] = useState('');
+  const [chopstick, setChopstick] = useState(true);
   
   const state = useSelector(state => state, [])
   const dispatch = useDispatch()
@@ -44,11 +45,20 @@ const OrderScreen = ({navigation, route}) => {
   }, []);
 
   const sendMessage = () => {
-    // let message = `Нове замовлення! Імя: ${name}, Телефон: ${phone}, Адреса: ${address}, Коментар: ${comment}, Товар: ${route.params.product.name}`
+    const ch = chopstick ? 'навчальні' : 'звичайні'
+
+    let message = `Нове замовлення! Імя: ${name}, Телефон: ${phone}, Адреса: ${address}, Кількість наборів: ${person}, Палички ${ch}... Склад замовлення: `
+    cart_this.forEach(el => {
+      message += el.name + '(x' + el.count + '),'
+    })
+
     Telegram.setToken('868514272:AAH6bAavjGQHH-bztp9Buu1ugozGVfNCgl0');
     Telegram.setRecipient(490328195);
-    Telegram.setMessage('fd');
+    Telegram.setMessage(message);
     Telegram.send();
+    dispatch({
+      type: 'CLEAR_STATE'
+    })
   };
 
   const getSum = (products) => {
@@ -77,6 +87,7 @@ const OrderScreen = ({navigation, route}) => {
       type: 'INCREASE_COUNT',
       value: idx
     })
+    console.log(cart_this)
   }
 
   const decreaseCount = (idx) => {
@@ -141,20 +152,24 @@ const OrderScreen = ({navigation, route}) => {
                 <View style={Styles.chopsticksWrapper}>
                   <Text style={Styles.chopsticksText}>Які палички вам найбільше підходять?</Text>
                   <View style={Styles.chopsticksImages}>
-                    <View style={Styles.chopsticksBlock}>
-                      <Image
-                        source={require('../../assets/images/Palochki_uchebnye.jpg')}
-                        style={Styles.chopsticksImage}
-                      />
-                      <Text style={Styles.chopsticksImageText}>Палички навчальні</Text>
-                    </View>
-                    <View style={Styles.chopsticksBlock}>
-                      <Image
-                        source={require('../../assets/images/Palochki_uchebnye.jpg')}
-                        style={Styles.chopsticksImage}
-                      />
-                      <Text style={Styles.chopsticksImageText}>Палички звичайні</Text>
-                    </View>
+                    <TouchableWithoutFeedback onPress={()=>{setChopstick(true)}}>
+                      <View style={Styles.chopsticksBlock}>
+                        <Image
+                          source={require('../../assets/images/Palochki_uchebnye.jpg')}
+                          style={Styles.chopsticksImage}
+                        />
+                        <Text style={chopstick ? Styles.chopsticksImageTextActive : Styles.chopsticksImageText}>Палички навчальні</Text>
+                      </View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={()=>{setChopstick(false)}}>
+                      <View style={Styles.chopsticksBlock}>
+                        <Image
+                          source={require('../../assets/images/Palochki_uchebnye.jpg')}
+                          style={Styles.chopsticksImage}
+                        />
+                        <Text style={!chopstick ? Styles.chopsticksImageTextActive : Styles.chopsticksImageText}>Палички звичайні</Text>
+                      </View>
+                    </TouchableWithoutFeedback>
                   </View>
                 </View>
 
@@ -163,8 +178,9 @@ const OrderScreen = ({navigation, route}) => {
                     style={Styles.input}
                     placeholder="Кількість приборів"
                     placeholderTextColor="#DAE1E7"
-                    onChangeText={v => setName(v)}
-                    value={name}
+                    onChangeText={v => setPerson(v)}
+                    keyboardType="numeric"
+                    value={person}
                   />
                   <TextInput
                     style={Styles.input}
@@ -177,25 +193,24 @@ const OrderScreen = ({navigation, route}) => {
                     style={Styles.input}
                     placeholder="Телефон"
                     placeholderTextColor="#DAE1E7"
-                    onChangeText={v => setName(v)}
-                    value={name}
+                    onChangeText={v => setPhone(v)}
+                    keyboardType="numeric"
+                    value={phone}
                   />
                   <TextInput
                     style={Styles.input}
                     placeholder="Адреса"
                     placeholderTextColor="#DAE1E7"
-                    onChangeText={v => setName(v)}
-                    value={name}
+                    onChangeText={v => setAddress(v)}
+                    value={address}
                   />
-                </View>
-                <View>
-                  <Text>Оберіть доставку</Text>
                 </View>
                 <TouchableOpacity
                   onPress={() => {
-                    if (name != '' || phone != '' || address != '') {
+                    if (name != '' && phone != '' && address != '') {
                       sendMessage();
-                      navigation.navigate('End');
+                      isEmpty(true)
+                      navigation.navigate('End');                      
                     }
                   }}>
                   <View styl={Styles.orderBtn}>

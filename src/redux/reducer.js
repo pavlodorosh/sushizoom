@@ -43,6 +43,10 @@ const appMainReducer = (state = INITIAL_STATE, action) => {
             return state    
         case 'INCREASE_COUNT':
             state.cart[action.value].count++
+            return state    
+        case 'CLEAR_STATE':
+            state.cartCount = 0
+            state.cart = []
             return state   
         case 'CITY_HANDLE_CLICK':
             state.city = action.value

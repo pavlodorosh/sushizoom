@@ -191,6 +191,10 @@ const Styles = StyleSheet.create({
     color: Colors.white,
     width: 80
   },
+  chopsticksImageTextActive: {
+    color: Colors.green,
+    width: 80
+  },
   chopsticksText: {
     color: Colors.white,
     fontSize: 18
