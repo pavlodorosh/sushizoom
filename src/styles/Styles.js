@@ -20,20 +20,32 @@ const Styles = StyleSheet.create({
   },
   cartIconImage: {
     resizeMode: 'contain',
-    width: 38,
-    height: 45,
-    marginTop: 30,
+    height: 50,
     paddingVertical: 10,
   },
   cartIconText: {
     color: Colors.white,
-    fontSize: 30,
+    fontSize: 20,
+    lineHeight: 30,
     marginLeft: 10,
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    borderRadius: 50,
+    backgroundColor: Colors.black,
+    width: 35,
+    height: 30,
+    textAlign: 'center'
   },
   cartIconWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+    backgroundColor: Colors.red,
+    height: 70,
+    width: 70,
+    marginVertical: 10,
+    borderRadius: 50
   },
   cartItem: {
     height: 80,

@@ -12,7 +12,7 @@ const IconCart = ({ count }) => {
     <>
       <View style={Styles.cartIconWrapper}>
         <Image
-          source={require('../../assets/images/cart-icon.png')}
+          source={require('../../assets/images/cartIcon.png')}
           style={Styles.cartIconImage}
         />
         <Text style={Styles.cartIconText}>{count}</Text>
