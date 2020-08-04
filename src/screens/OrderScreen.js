@@ -31,11 +31,6 @@ const OrderScreen = ({navigation, route}) => {
   const state = useSelector(state => state, [])
   const dispatch = useDispatch()
 
-  const radio_props = [
-    {label: 'Доставка за Вашою адресою ', value: 0 },
-    {label: 'Самовивіз (знижка -5%)', value: 1 }
-  ];
-
   useEffect(() => {
     setCart(state.data.cart);
     if(state.data.cart.length > 0){
@@ -49,7 +44,7 @@ const OrderScreen = ({navigation, route}) => {
 
     let message = `Нове замовлення! Імя: ${name}, Телефон: ${phone}, Адреса: ${address}, Кількість наборів: ${person}, Палички ${ch}... Склад замовлення: `
     cart_this.forEach(el => {
-      message += el.name + '(x' + el.count + '),'
+      message += el.name + '(x' + el.count + '), '
     })
 
     Telegram.setToken('868514272:AAH6bAavjGQHH-bztp9Buu1ugozGVfNCgl0');
