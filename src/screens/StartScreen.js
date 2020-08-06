@@ -1,14 +1,28 @@
 import {Image, SafeAreaView, ScrollView, StatusBar, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {Picker} from '@react-native-community/picker';
 import Styles from '../styles/Styles';
-import cities from '../data/cities'
+import firestore from '@react-native-firebase/firestore';
 import { useDispatch } from 'react-redux'
 
 const StartScreen = ({navigation}) => {
   const [region, setRegion] = useState(null);
+  const [cities, setCities] = useState([]);
+  const [cityArr, setCityArr] = useState([]);
   const dispatch = useDispatch()
+  
+  useEffect(() => {
+    setCities([])
+    firestore()
+    .collection(`City`)
+    .get()
+    .then(querySnapshot => {     
+      querySnapshot.forEach(documentSnapshot => {
+        let data = documentSnapshot.data()
+        setCities(prevState => [...prevState, data])  
+      });
+    });
+  }, []);
 
   const handleCityClick = city => {
     dispatch({
@@ -16,6 +30,12 @@ const StartScreen = ({navigation}) => {
       value: city
     })
     navigation.navigate('Main')
+  }
+
+  const handleRegionClick = (region) => {
+    let cityArr = cities.filter(el => el.region == region)
+    setCityArr(cityArr)
+    setRegion('exist')
   }
 
   return (
@@ -33,22 +53,22 @@ const StartScreen = ({navigation}) => {
             region == null && (
               <>
                 <View style={Styles.textBtnContainer}>
-                  <TouchableOpacity onPress={() => {setRegion('rivne')}}>
+                  <TouchableOpacity onPress={() => {handleRegionClick('Рівненська')}}>
                     <Text style={Styles.textBtn}>Рівненська область</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={Styles.textBtnContainer}>
-                  <TouchableOpacity onPress={() => {setRegion('zhutomir')}}>
+                  <TouchableOpacity onPress={() => {handleRegionClick('Житомирська')}}>
                     <Text style={Styles.textBtn}>Житомирська область</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={Styles.textBtnContainer}>
-                  <TouchableOpacity onPress={() => {setRegion('ternopil')}}>
+                  <TouchableOpacity onPress={() => {handleRegionClick('Тернопільська')}}>
                     <Text style={Styles.textBtn}>Тернопільська область</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={Styles.textBtnContainer}>
-                  <TouchableOpacity onPress={() => {setRegion('khmelnitsk')}}>
+                  <TouchableOpacity onPress={() => {handleRegionClick('Хмельницька')}}>
                     <Text style={Styles.textBtn}>Хмельницька область</Text>
                   </TouchableOpacity>
                 </View>
@@ -71,8 +91,8 @@ const StartScreen = ({navigation}) => {
           }         
           {
             region != null && (
-              cities[region].arr.map((item, index) => {
-                return <Text style={Styles.cityListText} key={index} onPress={() => {handleCityClick(item, cities[region].label)}}>{item}</Text>
+              cityArr.map((item, index) => {
+                return <Text style={Styles.cityListText} key={index} onPress={() => {handleCityClick(item)}}>{item.name}</Text>
               })
             )
           }

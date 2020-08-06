@@ -37,6 +37,11 @@ const Styles = StyleSheet.create({
     height: 30,
     textAlign: 'center'
   },
+  cartIconTouchWrap:{
+    backgroundColor: Colors.black,
+    justifyContent: 'center',
+    flexDirection: 'row'
+  },  
   cartIconWrapper: {
     justifyContent: 'center',
     alignItems: 'center',

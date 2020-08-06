@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import phones from '../data/phones'
 
 const INITIAL_STATE = {
     city: '',
@@ -49,13 +48,9 @@ const appMainReducer = (state = INITIAL_STATE, action) => {
             state.cart = []
             return state   
         case 'CITY_HANDLE_CLICK':
-            state.city = action.value
-            phones.forEach(el => {
-                if(el.city == action.value){
-                    state.phone = el.phone
-                }
-            })
-            if(action.value == 'Київ'){
+            state.city = action.value.name
+            state.phone = action.value.phone
+            if(action.value.name == 'Київ'){
                 state.priceKoefficient = 1.2
             } else {
                 state.priceKoefficient = 1

@@ -5,6 +5,7 @@ import {
   ScrollView,
   StatusBar,
   Text,
+  TouchableHighlight,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -51,14 +52,14 @@ const ProductsScreen = ({navigation, route}) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
+      <TouchableHighlight style={Styles.cartIconTouchWrap} onPress={() => {
+        navigation.navigate('Order')
+      }}>
+        <IconCart count={state.data.cartCount}/>
+      </TouchableHighlight>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={Styles.body}>
           <View style={Styles.sectionContainer}>
-            <TouchableOpacity onPress={() => {
-              navigation.navigate('Order')
-            }}>
-              <IconCart count={state.data.cartCount}/>
-            </TouchableOpacity>
             <Image
               source={require('../../assets/images/logo.png')}
               style={Styles.logoCategory}
