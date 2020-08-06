@@ -24,10 +24,10 @@ const StartScreen = ({navigation}) => {
     });
   }, []);
 
-  const handleCityClick = city => {
+  const handleCityClick = cityObj => {
     dispatch({
       type: 'CITY_HANDLE_CLICK',
-      value: city
+      value: cityObj
     })
     navigation.navigate('Main')
   }
@@ -35,7 +35,7 @@ const StartScreen = ({navigation}) => {
   const handleRegionClick = (region) => {
     let cityArr = cities.filter(el => el.region == region)
     setCityArr(cityArr)
-    setRegion('exist')
+    setRegion(1)
   }
 
   return (
