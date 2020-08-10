@@ -48,6 +48,7 @@ const StartScreen = ({navigation}) => {
             source={require('../../assets/images/logo.png')}
             style={Styles.logoMain}
           />
+          <Text style={Styles.categoryCity}>Доставка японської кухні</Text>
 
           {
             region == null && (

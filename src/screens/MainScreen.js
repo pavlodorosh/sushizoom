@@ -54,6 +54,7 @@ const CategoryScreen = ({navigation, route}) => {
               </View>
             </View>
           </View>
+            <Text style={{color: '#fff', fontSize: 20,}}>м. Київ, вул. Княжий Затон, 4</Text>
         </View>
       </ScrollView>
     </>
