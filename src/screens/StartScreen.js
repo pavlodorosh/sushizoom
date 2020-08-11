@@ -74,8 +74,8 @@ const StartScreen = ({navigation}) => {
                   </TouchableOpacity>
                 </View>
                 <View style={Styles.textBtnContainer}>
-                  <TouchableOpacity onPress={() => {handleCityClick('Київ', 'Київська')}}>
-                    <Text style={Styles.textBtn}>Київ</Text>
+                  <TouchableOpacity onPress={() => {handleRegionClick('Київська')}}>
+                    <Text style={Styles.textBtn}>Київська область</Text>
                   </TouchableOpacity>
                 </View>
               </>

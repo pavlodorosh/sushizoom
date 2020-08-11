@@ -22,7 +22,7 @@ const CategoryScreen = ({navigation, route}) => {
   const state = useSelector(state => state, [])
 
   return (
-    <>
+    <View style={Styles.back}>
       <TouchableHighlight style={Styles.cartIconTouchWrap} onPress={() => {
         navigation.navigate('Order')
       }}>
@@ -53,11 +53,16 @@ const CategoryScreen = ({navigation, route}) => {
                 </TouchableWithoutFeedback>
               </View>
             </View>
+            <View style={Styles.contactTextWrapper}>
+              <Text style={Styles.contactTextBold}>Адреса</Text>
+              <Text style={Styles.contactText}>м. Київ, вул. Княжий Затон, 4</Text>
+              <Text style={Styles.contactTextBold}>Графік роботи</Text>
+              <Text style={Styles.contactText}>щоденно з 10:00 до 23:00</Text>
+            </View>
           </View>
-            <Text style={{color: '#fff', fontSize: 20,}}>м. Київ, вул. Княжий Затон, 4</Text>
         </View>
       </ScrollView>
-    </>
+    </View>
   );
 };
 

@@ -50,7 +50,7 @@ const ProductsScreen = ({navigation, route}) => {
   }
 
   return (
-    <>
+    <View style={Styles.back}>
       <StatusBar barStyle="dark-content" />
       <TouchableHighlight style={Styles.cartIconTouchWrap} onPress={() => {
         navigation.navigate('Order')
@@ -95,7 +95,7 @@ const ProductsScreen = ({navigation, route}) => {
           </View>
         </View>
       </ScrollView>
-    </>
+    </View>
   );
 };
 

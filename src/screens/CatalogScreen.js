@@ -32,7 +32,7 @@ const CatalogScreen = ({navigation, route}) => {
 
   
     return (
-      <>
+      <View style={Styles.back}>
         <TouchableHighlight style={Styles.cartIconTouchWrap} onPress={() => {
           navigation.navigate('Order')
         }}>
@@ -75,7 +75,7 @@ const CatalogScreen = ({navigation, route}) => {
             </View>
           </View>
         </ScrollView>
-      </>
+      </View>
     );
   };
   

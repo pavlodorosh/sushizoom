@@ -7,6 +7,9 @@ const productCategoryHalfWidth = Dimensions.get('window').width / 2 - 20;
 const formWidth = Dimensions.get('window').width - 50;
 
 const Styles = StyleSheet.create({
+  back: {
+    backgroundColor: Colors.black,
+  },
   body: {
     backgroundColor: Colors.black,
     justifyContent: 'center',
@@ -35,13 +38,16 @@ const Styles = StyleSheet.create({
     backgroundColor: Colors.black,
     width: 35,
     height: 30,
-    textAlign: 'center'
+    textAlign: 'center',
   },
-  cartIconTouchWrap:{
-    backgroundColor: Colors.black,
-    justifyContent: 'center',
-    flexDirection: 'row'
-  },  
+  cartIconTouchWrap: {
+    backgroundColor: 'rgba(0,0,0,0)',
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    paddingRight: 20,
+    marginBottom: -70,
+    zIndex: 2,
+  },
   cartIconWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -50,18 +56,18 @@ const Styles = StyleSheet.create({
     height: 70,
     width: 70,
     marginVertical: 10,
-    borderRadius: 50
+    borderRadius: 50,
   },
   cartItem: {
     height: 80,
     justifyContent: 'space-between',
     flexDirection: 'row',
     width: formWidth,
-    marginBottom: 20
+    marginBottom: 20,
   },
   cartItems: {
     borderBottomWidth: 1,
-    borderBottomColor: Colors.light
+    borderBottomColor: Colors.light,
   },
   cartItemBottomWrapper: {
     justifyContent: 'space-between',
@@ -72,7 +78,7 @@ const Styles = StyleSheet.create({
   cartItemCount: {
     color: Colors.light,
     fontSize: 22,
-    marginHorizontal: 15
+    marginHorizontal: 15,
   },
   cartItemImage: {
     resizeMode: 'contain',
@@ -87,11 +93,11 @@ const Styles = StyleSheet.create({
     width: 20,
     height: 20,
     lineHeight: 20,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   cartItemMinMaxWrapper: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   cartItemName: {
     color: Colors.white,
@@ -99,20 +105,20 @@ const Styles = StyleSheet.create({
   },
   cartItemRemove: {
     width: 25,
-    resizeMode: 'contain'
+    resizeMode: 'contain',
   },
   cartItemNameWrapper: {
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   cartItemPrice: {
     color: Colors.light,
     fontSize: 25,
-    marginLeft: 20
+    marginLeft: 20,
   },
   categoryCity: {
     color: Colors.white,
     marginVertical: 20,
-    fontSize: 26,
+    fontSize: 24,
   },
   categoryImg: {
     resizeMode: 'contain',
@@ -194,31 +200,53 @@ const Styles = StyleSheet.create({
     color: Colors.white,
   },
   chopsticksBlock: {
-    marginRight: 20
+    marginRight: 20,
   },
   chopsticksImage: {
     height: 80,
     resizeMode: 'contain',
-    width: 80
+    width: 80,
   },
   chopsticksImages: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   chopsticksImageText: {
     color: Colors.white,
-    width: 80
+    width: 80,
   },
   chopsticksImageTextActive: {
     color: Colors.green,
-    width: 80
+    width: 80,
   },
   chopsticksText: {
     color: Colors.white,
-    fontSize: 18
+    fontSize: 18,
   },
   chopsticksWrapper: {
     flexDirection: 'column',
-    width: formWidth
+    width: formWidth,
+    marginBottom: 20
+  },
+  contactText: {
+    color: Colors.white,
+    fontSize: 20,
+    textAlign: 'center',
+  },
+  contactTextBold: {
+    color: Colors.white,
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginTop: 10
+  },
+  contactTextWrapper: {
+    width: formWidth,
+    justifyContent: 'flex-start',
+    marginTop: 10
+  },
+  deliveryTitle:{
+    color: Colors.white,
+    fontSize: 22
   },
   endText: {
     color: Colors.white,
@@ -231,11 +259,10 @@ const Styles = StyleSheet.create({
   },
   input: {
     borderBottomColor: Colors.light,
-    // backgroundColor: 'transparent',
     borderBottomWidth: 1,
     width: formWidth,
     color: Colors.light,
-    textAlign: 'center',
+    // textAlign: 'center',
     fontSize: 18,
     height: 50,
     marginBottom: 10,
@@ -266,6 +293,18 @@ const Styles = StyleSheet.create({
     marginTop: 10,
     textAlign: 'center',
   },
+  radioBtn: {
+    color: Colors.white,
+    marginBottom: 20
+  },
+  radioBtnText:{
+    color: Colors.white,
+    marginVertical: 0,
+    fontSize: 18
+  },
+  radioBtnWrapper: {
+    width: formWidth
+  },  
   sectionContainer: {
     margin: 32,
     paddingHorizontal: 12,
@@ -296,7 +335,7 @@ const Styles = StyleSheet.create({
     textAlign: 'right',
     width: formWidth,
     fontSize: 26,
-    marginVertical: 15
+    marginVertical: 15,
   },
   textBtn: {
     color: Colors.white,
