@@ -38,11 +38,11 @@ const OrderScreen = ({navigation, route}) => {
 
   const data = [
     {
-      label: 'Доставка за адресою'
-     },
-     {
-      label: 'Самовивіз'
-     }
+      label: 'Доставка за адресою',
+    },
+    {
+      label: 'Самовивіз',
+    },
   ];
   useEffect(() => {
     setCart(state.data.cart);
@@ -55,7 +55,9 @@ const OrderScreen = ({navigation, route}) => {
   const sendMessage = () => {
     const ch = chopstick ? 'навчальні' : 'звичайні';
 
-    let message = `Нове замовлення! Імя: ${name}, Сума: ${getSum(cart_this)} грн, Телефон: ${phone}, Адреса: ${address}, Кількість наборів: ${person}, Доставка: ${delivery}, Палички ${ch}... Склад замовлення: `;
+    let message = `Нове замовлення! Імя: ${name}, Сума: ${getSum(
+      cart_this,
+    )} грн, Телефон: ${phone}, Адреса: ${address}, Кількість наборів: ${person}, Доставка: ${delivery}, Палички ${ch}... Склад замовлення: `;
     cart_this.forEach(el => {
       message += el.name + '(x' + el.count + '), ';
     });
@@ -75,8 +77,8 @@ const OrderScreen = ({navigation, route}) => {
       value +=
         (item.price * state.data.priceKoefficient).toFixed(0) * item.count;
     });
-    if(value < 300){
-      value += deliveryCash
+    if (value < 800) {
+      value += deliveryCash;
     }
     return value;
   };
@@ -176,27 +178,27 @@ const OrderScreen = ({navigation, route}) => {
                   Сума: {getSum(cart_this)} грн
                 </Text>
               )}
-              
+
               <View style={Styles.radioBtnWrapper}>
                 <Text style={Styles.deliveryTitle}>Варіант доставки</Text>
                 <RadioButtonRN
                   data={data}
                   initial={1}
-                  activeColor='#90d40d'
-                  selectedBtn={(e) => {
-                    if(e.label == 'Самовивіз'){
-                      setDeliveryCash(30)
+                  activeColor="#90d40d"
+                  selectedBtn={e => {
+                    if (e.label == 'Самовивіз') {
+                      setDeliveryCash(30);
                     } else {
-                      setDeliveryCash(0)
+                      setDeliveryCash(0);
                     }
-                    setDelivery(e.label)
+                    setDelivery(e.label);
                   }}
                   style={Styles.radioBtn}
                   textStyle={Styles.radioBtnText}
                   box={false}
                   animationTypes={['pulse']}
                   duration={0}
-                />                
+                />
               </View>
 
               <View style={Styles.chopsticksWrapper}>
@@ -265,7 +267,7 @@ const OrderScreen = ({navigation, route}) => {
                   placeholder="Телефон"
                   placeholderTextColor="#DAE1E7"
                   onChangeText={v => setPhone(v)}
-                  keyboardType="numeric"
+                  keyboardType="phone-pad"
                   value={phone}
                 />
                 <TextInput
