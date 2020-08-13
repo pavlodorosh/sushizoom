@@ -229,8 +229,8 @@ const Styles = StyleSheet.create({
   },
   contactText: {
     color: Colors.white,
-    fontSize: 20,
-    textAlign: 'center',
+    fontSize: 18,
+    textAlign: 'left',
   },
   contactTextBold: {
     color: Colors.white,

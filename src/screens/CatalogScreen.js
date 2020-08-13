@@ -10,27 +10,19 @@ import React, {useEffect, useState} from 'react';
 
 import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
-import firestore from '@react-native-firebase/firestore';
+import database from '@react-native-firebase/database';
 import { useSelector } from 'react-redux'
 
 const CatalogScreen = ({navigation, route}) => {   
-    const [categories, setCategories] = useState([])
+    const [categories, setCategories] = useState(null)
     const state = useSelector(state => state, [])
     
     useEffect(() => {
-      setCategories([])
-      firestore()
-        .collection(`Category`)
-        .get()
-        .then(querySnapshot => {   
-          console.log(querySnapshot)      
-          querySnapshot.forEach(documentSnapshot => {
-            setCategories(prevState => [...prevState, documentSnapshot.data()])          
-          });
-        });
+      database().ref('category').once('value').then(snapshot => {
+        setCategories(snapshot.val())
+      })
     }, []);
 
-  
     return (
       <View style={Styles.back}>
         <TouchableHighlight style={Styles.cartIconTouchWrap} onPress={() => {
@@ -46,8 +38,8 @@ const CatalogScreen = ({navigation, route}) => {
                 style={Styles.logoCategory}
               />
               {
-                categories.length > 0 && (
-                  categories.map((cat, index) => {
+                categories != null && (
+                  Object.keys(categories).map((cat, index) => {
                     return (
                       <View key={index}>
                          <TouchableWithoutFeedback

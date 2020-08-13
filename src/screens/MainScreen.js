@@ -35,7 +35,7 @@ const CategoryScreen = ({navigation, route}) => {
               source={require('../../assets/images/logo.png')}
               style={Styles.logoCategory}
             />
-            <Text style={Styles.categoryCity}>{state.data.city}</Text>
+            <Text style={Styles.categoryCity}>{state.data.city[0].name}</Text>
             <View style={Styles.textBtnContainer}>
               <TouchableWithoutFeedback onPress={() => {navigation.navigate('Catalog')}}>
                 <Text style={Styles.textBtn}>Меню</Text>
@@ -48,16 +48,15 @@ const CategoryScreen = ({navigation, route}) => {
                 </TouchableWithoutFeedback>
               </View>        
               <View style={Styles.textBtnContainer}>
-                <TouchableWithoutFeedback onPress={() => {Linking.openURL(`tel:${state.data.phone}`)}}>
+                <TouchableWithoutFeedback onPress={() => {Linking.openURL(`tel:${state.data.city.phone}`)}}>
                   <Text style={Styles.textBtnCall}>Зателефонувати</Text>
                 </TouchableWithoutFeedback>
               </View>
             </View>
             <View style={Styles.contactTextWrapper}>
-              <Text style={Styles.contactTextBold}>Адреса</Text>
-              <Text style={Styles.contactText}>м. Київ, вул. Княжий Затон, 4</Text>
-              <Text style={Styles.contactTextBold}>Графік роботи</Text>
-              <Text style={Styles.contactText}>щоденно з 10:00 до 23:00</Text>
+              <Text style={Styles.contactText}>{state.data.city[0].adres}</Text>
+              <Text style={Styles.contactText}>{state.data.city[0].worktime}</Text>
+              <Text style={Styles.contactText}>{state.data.city[0].ordertime}</Text>
             </View>
           </View>
         </View>

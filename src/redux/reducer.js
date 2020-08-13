@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 const INITIAL_STATE = {
-    city: '',
+    city: [],
     cart: [],
     cartCount: 0,
     phone: null,
@@ -48,13 +48,7 @@ const appMainReducer = (state = INITIAL_STATE, action) => {
             state.cart = []
             return state   
         case 'CITY_HANDLE_CLICK':
-            state.city = action.value.name
-            state.phone = action.value.phone
-            if(action.value.name == 'Київ'){
-                state.priceKoefficient = 1.2
-            } else {
-                state.priceKoefficient = 1
-            }
+            state.city.push(action.value)     
             return state
         default:
             return state

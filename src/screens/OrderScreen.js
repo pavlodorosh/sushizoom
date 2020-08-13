@@ -44,6 +44,7 @@ const OrderScreen = ({navigation, route}) => {
       label: 'Самовивіз'
      }
   ];
+  
   useEffect(() => {
     setCart(state.data.cart);
     if (state.data.cart.length > 0) {
@@ -54,12 +55,10 @@ const OrderScreen = ({navigation, route}) => {
 
   const sendMessage = () => {
     const ch = chopstick ? 'навчальні' : 'звичайні';
-
     let message = `Нове замовлення! Імя: ${name}, Сума: ${getSum(cart_this)} грн, Телефон: ${phone}, Адреса: ${address}, Кількість наборів: ${person}, Доставка: ${delivery}, Палички ${ch}... Склад замовлення: `;
     cart_this.forEach(el => {
       message += el.name + '(x' + el.count + '), ';
     });
-
     Telegram.setToken('868514272:AAH6bAavjGQHH-bztp9Buu1ugozGVfNCgl0');
     Telegram.setRecipient(490328195);
     Telegram.setMessage(message);
