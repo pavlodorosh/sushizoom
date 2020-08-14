@@ -73,9 +73,9 @@ const OrderScreen = ({navigation, route}) => {
     let value = 0;
     products.forEach(item => {
       value +=
-        (item.price * state.data.priceKoefficient).toFixed(0) * item.count;
+        (item.price * state.data.city[0].priceKoef).toFixed(0) * item.count;
     });
-    if (value < 800) {
+    if (value < 300) {
       value += deliveryCash;
     }
     return value;
@@ -99,7 +99,6 @@ const OrderScreen = ({navigation, route}) => {
       type: 'INCREASE_COUNT',
       value: idx,
     });
-    console.log(cart_this);
   };
 
   const decreaseCount = idx => {
@@ -151,10 +150,7 @@ const OrderScreen = ({navigation, route}) => {
                             </TouchableWithoutFeedback>
                           </View>
                           <Text style={Styles.cartItemPrice}>
-                            {(item.price * state.data.priceKoefficient).toFixed(
-                              0,
-                            ) * item.count}{' '}
-                            грн
+                            {(item.price * state.data.city[0].priceKoef).toFixed(0,) * item.count} грн
                           </Text>
                         </View>
                       </View>
@@ -184,7 +180,7 @@ const OrderScreen = ({navigation, route}) => {
                   initial={1}
                   activeColor="#90d40d"
                   selectedBtn={e => {
-                    if (e.label == 'Самовивіз') {
+                    if (e.label == 'Доставка за адресою') {
                       setDeliveryCash(30);
                     } else {
                       setDeliveryCash(0);

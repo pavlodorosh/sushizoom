@@ -38,7 +38,7 @@ const CategoryScreen = ({navigation, route}) => {
             <Text style={Styles.categoryCity}>{state.data.city[0].name}</Text>
             <View style={Styles.textBtnContainer}>
               <TouchableWithoutFeedback onPress={() => {navigation.navigate('Catalog')}}>
-                <Text style={Styles.textBtn}>Меню</Text>
+                <Text style={Styles.textBtnMainScreen}>Меню</Text>
               </TouchableWithoutFeedback>
             </View>
             <View style={Styles.buttonsInRow}>              
@@ -54,9 +54,27 @@ const CategoryScreen = ({navigation, route}) => {
               </View>
             </View>
             <View style={Styles.contactTextWrapper}>
-              <Text style={Styles.contactText}>{state.data.city[0].adres}</Text>
-              <Text style={Styles.contactText}>{state.data.city[0].worktime}</Text>
-              <Text style={Styles.contactText}>{state.data.city[0].ordertime}</Text>
+              <View style={Styles.contactWrapper}>
+                <Image
+                  source={require('../../assets/images/location.png')}
+                  style={Styles.contactImg}
+                />
+                <Text style={Styles.contactText}>{state.data.city[0].adres}</Text>
+              </View>
+              <View style={Styles.contactWrapper}>
+                <Image
+                  source={require('../../assets/images/time.png')}
+                  style={Styles.contactImg}
+                />
+                <Text style={Styles.contactText}>{state.data.city[0].worktime}</Text>
+              </View>
+              <View style={Styles.contactWrapper}>
+                <Image
+                  source={require('../../assets/images/time.png')}
+                  style={Styles.contactImg}
+                />
+                <Text style={Styles.contactText}>{state.data.city[0].ordertime}</Text>
+              </View>
             </View>
           </View>
         </View>

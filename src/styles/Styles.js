@@ -10,6 +10,9 @@ const Styles = StyleSheet.create({
   back: {
     backgroundColor: Colors.black,
   },
+  backImage:{
+    resizeMode: 'cover'
+  },  
   body: {
     backgroundColor: Colors.black,
     justifyContent: 'center',
@@ -17,7 +20,7 @@ const Styles = StyleSheet.create({
     minHeight: Dimensions.get('window').height,
   },
   buttonsInRow: {
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     flexDirection: 'row',
     width: formWidth,
   },
@@ -63,7 +66,7 @@ const Styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     width: formWidth,
-    marginBottom: 20,
+    marginBottom: 30,
   },
   cartItems: {
     borderBottomWidth: 1,
@@ -73,7 +76,7 @@ const Styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center',    
   },
   cartItemCount: {
     color: Colors.light,
@@ -101,19 +104,22 @@ const Styles = StyleSheet.create({
   },
   cartItemName: {
     color: Colors.white,
-    fontSize: 22,
-  },
-  cartItemRemove: {
-    width: 25,
-    resizeMode: 'contain',
+    fontSize: 18,
   },
   cartItemNameWrapper: {
     flexDirection: 'column',
+    marginLeft: 10,
+    width: formWidth - 125,
+    paddingHorizontal: 10
   },
   cartItemPrice: {
     color: Colors.light,
     fontSize: 25,
     marginLeft: 20,
+  },
+  cartItemRemove: {
+    width: 25,
+    resizeMode: 'contain',
   },
   categoryCity: {
     color: Colors.white,
@@ -244,6 +250,16 @@ const Styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: 10
   },
+  contactImg:{
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
+    marginRight: 10
+  },
+  contactWrapper: {
+    flexDirection: 'row',
+    marginBottom: 20
+  },
   deliveryTitle:{
     color: Colors.white,
     fontSize: 22
@@ -295,7 +311,8 @@ const Styles = StyleSheet.create({
   },
   radioBtn: {
     color: Colors.white,
-    marginBottom: 20
+    marginBottom: 20,
+    marginLeft: -10
   },
   radioBtnText:{
     color: Colors.white,
@@ -362,6 +379,13 @@ const Styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: Colors.red,
     marginBottom: 20,
+  },
+  textBtnMainScreen: {
+    color: Colors.white,
+    paddingVertical: 10,
+    width: formWidth,
+    textAlign: 'center',
+    fontSize: 20,
   },
 });
 

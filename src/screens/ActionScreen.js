@@ -14,29 +14,22 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 
 import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
-import firestore from '@react-native-firebase/firestore';
+import database from '@react-native-firebase/database';
 
 const ProductsScreen = ({navigation, route}) => {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState(null)
   
   const state = useSelector(state => state, [])
   const dispatch = useDispatch()
 
   useEffect(() => {
-    setProducts([])
-    firestore()
-    .collection(`Product`)
-    .get()
-    .then(querySnapshot => {     
-      querySnapshot.forEach(documentSnapshot => {
-        let data = documentSnapshot.data()
-        if(data.action){
-          data.price = data.new_price
-          setProducts(prevState => [...prevState, data])    
-        }
-      });
-    });
-  }, []);
+    if(products == null){
+      database().ref(`product}`).once('value').then(snapshot => {
+        setProducts(snapshot.val())
+      })
+      console.log(products)
+    }
+  });
 
   const addToCart = (el) => {
     dispatch({
@@ -62,30 +55,33 @@ const ProductsScreen = ({navigation, route}) => {
               style={Styles.logoCategory}
             />
               {                
-                products.length != 0 && (
-                    products.map((product, index) => {
-                      return (
-                        <View style={Styles.categoryProductSection} key={index}>
-                          <Image
-                            source={{uri: product.image}}
-                            style={Styles.categoryProductImage}
-                          />
-                          <View key={index} style={Styles.categoryProductSectionText}>
-                            <Text style={Styles.categoryProductTitle}>{product.name}</Text>
-                            <Text style={Styles.categoryProductTitle}>{product.price} ГРН</Text>
-                            <Text style={Styles.categoryProductText}>{product.ingredients}</Text>
-                            <TouchableOpacity onPress={() => {
-                              addToCart(product)
-                            }}>
-                              <View styl={Styles.categoryProductButton}>
-                                <Text style={Styles.categoryProductButtonText}>
-                                  В КОШИК
-                                </Text>
-                              </View>
-                            </TouchableOpacity>
+                products != null && (
+                  Object.keys(products).map((el, index) => {
+                      if(products[el].action){
+                        return (
+                          <View style={Styles.categoryProductSection} key={index}>
+                            <Image
+                              source={{uri: products[el].image}}
+                              style={Styles.categoryProductImage}
+                            />
+                            <View key={index} style={Styles.categoryProductSectionText}>
+                              <Text style={Styles.categoryProductTitle}>{products[el].name}</Text>
+                              <Text style={Styles.categoryProductTitle}>{(products[el].price * state.data.city[0].priceKoef).toFixed(0)} ГРН</Text>
+                              <Text style={Styles.categoryProductText}>{products[el].ingredients}</Text>
+                              <Text style={Styles.categoryProductText}>{products[el].weight} гр</Text>
+                              <TouchableOpacity onPress={() => {
+                                addToCart(products[el])
+                              }}>
+                                <View styl={Styles.categoryProductButton}>
+                                  <Text style={Styles.categoryProductButtonText}>
+                                    В КОШИК
+                                  </Text>
+                                </View>
+                              </TouchableOpacity>
+                            </View>
                           </View>
-                        </View>
-                      )
+                        )
+                      }                      
                     })
                 )
               }              

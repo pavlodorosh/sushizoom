@@ -18,10 +18,12 @@ const CatalogScreen = ({navigation, route}) => {
     const state = useSelector(state => state, [])
     
     useEffect(() => {
-      database().ref('category').once('value').then(snapshot => {
-        setCategories(snapshot.val())
-      })
-    }, []);
+      if(categories == null){
+        database().ref('category').once('value').then(snapshot => {
+          setCategories(snapshot.val())
+        })
+      }
+    });
 
     return (
       <View style={Styles.back}>
@@ -39,24 +41,24 @@ const CatalogScreen = ({navigation, route}) => {
               />
               {
                 categories != null && (
-                  Object.keys(categories).map((cat, index) => {
+                  Object.keys(categories).reverse().map((cat, index) => {
                     return (
                       <View key={index}>
                          <TouchableWithoutFeedback
                           onPress={() => {
-                            navigation.navigate('Products', {id: cat.id});
+                            navigation.navigate('Products', {id: categories[cat].id});
                           }}>
                           <Image
-                            source={{uri: cat.image}}
+                            source={{uri: categories[cat].image}}
                             style={Styles.categoryImg}
                           />
                         </TouchableWithoutFeedback>
                         <Text
                           style={Styles.categoryTitle}
                           onPress={() => {
-                            navigation.navigate('Products', {id: cat.id});
+                            navigation.navigate('Products', {id: categories[cat].id});
                           }}>
-                          {cat.name}
+                          {categories[cat].name}
                         </Text>
                       </View>
                     )

@@ -48,7 +48,7 @@ const appMainReducer = (state = INITIAL_STATE, action) => {
             state.cart = []
             return state   
         case 'CITY_HANDLE_CLICK':
-            state.city.push(action.value)     
+            state.city = [action.value]    
             return state
         default:
             return state

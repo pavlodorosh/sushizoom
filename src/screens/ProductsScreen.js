@@ -14,31 +14,18 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 
 import IconCart from '../components/IconCart'
 import Styles from '../styles/Styles';
-import firestore from '@react-native-firebase/firestore';
+import database from '@react-native-firebase/database';
 
 const ProductsScreen = ({navigation, route}) => {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState(null)
   
   const state = useSelector(state => state, [])
   const dispatch = useDispatch()
 
   useEffect(() => {
-    setProducts([])
-    firestore()
-    .collection(`Product`)
-    .get()
-    .then(querySnapshot => {     
-      querySnapshot.forEach(documentSnapshot => {
-        let data = documentSnapshot.data()
-        if(data.category == route.params.id){
-          if(data.action){
-            data.price = data.new_price
-          }
-          setProducts(prevState => [...prevState, data])       
-        }
-   
-      });
-    });
+    database().ref(`product/${route.params.id}`).once('value').then(snapshot => {
+      setProducts(snapshot.val())
+    })
   }, []);
 
   const addToCart = (el) => {
@@ -65,20 +52,21 @@ const ProductsScreen = ({navigation, route}) => {
               style={Styles.logoCategory}
             />
               {                
-                products.length != 0 && (
-                    products.map((product, index) => {
+                products != null && (
+                  Object.keys(products).map((el, index) => {
                       return (
                         <View style={Styles.categoryProductSection} key={index}>
                           <Image
-                            source={{uri: product.image}}
+                            source={{uri: products[el].image}}
                             style={Styles.categoryProductImage}
                           />
                           <View key={index} style={Styles.categoryProductSectionText}>
-                            <Text style={Styles.categoryProductTitle}>{product.name}</Text>
-                            <Text style={Styles.categoryProductTitle}>{product.price} ГРН</Text>
-                            <Text style={Styles.categoryProductText}>{product.ingredients}</Text>
+                            <Text style={Styles.categoryProductTitle}>{products[el].name}</Text>
+                            <Text style={Styles.categoryProductTitle}>{(products[el].price * state.data.city[0].priceKoef).toFixed(0)} ГРН</Text>
+                            <Text style={Styles.categoryProductText}>{products[el].ingredients}</Text>
+                            <Text style={Styles.categoryProductText}>{products[el].weight} гр</Text>
                             <TouchableOpacity onPress={() => {
-                              addToCart(product)
+                              addToCart(products[el])
                             }}>
                               <View styl={Styles.categoryProductButton}>
                                 <Text style={Styles.categoryProductButtonText}>
