@@ -27,7 +27,7 @@ const CatalogScreen = ({navigation, route}) => {
 
     return (
       <View style={Styles.back}>
-        <TouchableHighlight style={Styles.cartIconTouchWrap} onPress={() => {
+        <TouchableHighlight underlayColor="transparent" style={Styles.cartIconTouchWrap} onPress={() => {
           navigation.navigate('Order')
         }}>
           <IconCart count={state.data.cartCount}/>

@@ -42,7 +42,7 @@ const ProductsScreen = ({navigation, route}) => {
   return (
     <View style={Styles.back}>
       <StatusBar barStyle="dark-content" />
-      <TouchableHighlight style={Styles.cartIconTouchWrap} onPress={() => {
+      <TouchableHighlight underlayColor="transparent" style={Styles.cartIconTouchWrap} onPress={() => {
         navigation.navigate('Order')
       }}>
         <IconCart count={state.data.cartCount}/>

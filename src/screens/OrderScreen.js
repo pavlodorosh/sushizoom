@@ -61,7 +61,7 @@ const OrderScreen = ({navigation, route}) => {
       message += el.name + '(x' + el.count + '), ';
     });
     Telegram.setToken('868514272:AAH6bAavjGQHH-bztp9Buu1ugozGVfNCgl0');
-    Telegram.setRecipient(490328195);
+    Telegram.setRecipient(-487516350);
     Telegram.setMessage(message);
     Telegram.send();
     dispatch({
@@ -127,7 +127,8 @@ const OrderScreen = ({navigation, route}) => {
                     <View key={index} style={Styles.cartItem}>
                       <Image
                         source={{uri: item.image}}
-                        style={Styles.cartItemImage}
+                        style={Styles.cartItemImage}                        
+                        resizeMethod="resize"
                       />
                       <View style={Styles.cartItemNameWrapper}>
                         <Text style={Styles.cartItemName}>{item.name}</Text>

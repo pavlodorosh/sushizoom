@@ -39,7 +39,7 @@ const ProductsScreen = ({navigation, route}) => {
   return (
     <View style={Styles.back}>
       <StatusBar barStyle="dark-content" />
-      <TouchableHighlight style={Styles.cartIconTouchWrap} onPress={() => {
+      <TouchableHighlight underlayColor="transparent" style={Styles.cartIconTouchWrap} onPress={() => {
         navigation.navigate('Order')
       }}>
         <IconCart count={state.data.cartCount}/>
@@ -59,6 +59,7 @@ const ProductsScreen = ({navigation, route}) => {
                           <Image
                             source={{uri: products[el].image}}
                             style={Styles.categoryProductImage}
+                            resizeMethod="resize"
                           />
                           <View key={index} style={Styles.categoryProductSectionText}>
                             <Text style={Styles.categoryProductTitle}>{products[el].name}</Text>

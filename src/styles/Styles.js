@@ -11,7 +11,12 @@ const Styles = StyleSheet.create({
     backgroundColor: Colors.black,
   },
   backImage:{
-    resizeMode: 'cover'
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    position: 'absolute',
+    height: Dimensions.get('window').height,
+    opacity: 0.4,
   },  
   body: {
     backgroundColor: Colors.black,
@@ -264,10 +269,22 @@ const Styles = StyleSheet.create({
     color: Colors.white,
     fontSize: 22
   },
-  endText: {
-    color: Colors.white,
+  endScreenWrapper:{
+    width: Dimensions.get('window').width - 20
+  },
+  endTextSubtitle: {
+    color: Colors.grey,
+    lineHeight: 36,
     backgroundColor: 'transparent',
     fontSize: 24,
+  },
+  endTextTitle: {
+    color: Colors.white,
+    backgroundColor: 'transparent',
+    fontSize: 36,
+    lineHeight: 54,
+    marginTop: 150,
+    fontWeight: 'bold'
     // bac
   },
   form: {
@@ -380,6 +397,14 @@ const Styles = StyleSheet.create({
     backgroundColor: Colors.red,
     marginBottom: 20,
   },
+  textBtnEndScreen:{
+    color: Colors.black,
+    paddingVertical: 15,
+    width: formWidth / 1.5,
+    textAlign: 'center',
+    fontSize: 26,
+    fontWeight: 'bold'
+  },
   textBtnMainScreen: {
     color: Colors.white,
     paddingVertical: 10,
@@ -387,6 +412,13 @@ const Styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
   },
+  textEndBtnContainer:{
+    borderRadius: 50,
+    backgroundColor: Colors.white,
+    marginBottom: 20,
+    width: formWidth / 1.5,
+    marginTop: 100
+  }
 });
 
 export default Styles;

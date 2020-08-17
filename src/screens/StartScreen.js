@@ -25,18 +25,27 @@ const StartScreen = ({navigation}) => {
   const handleCityClick = cityObj => {
     if(cities == {}){
       getCitiesFromDB()  
-    }
-    dispatch({
-      type: 'CITY_HANDLE_CLICK',
-      value: cityObj
-    })
-    navigation.navigate('Main')
+    } else {
+      dispatch({
+        type: 'CITY_HANDLE_CLICK',
+        value: cityObj
+      })
+      navigation.navigate('Main')
+    }    
   }
 
   const handleRegionClick = (region) => {
-    setCityArr(cities[region])
-    setRegion(1)
+    if(cities != undefined){
+      setRegion(1)
+      setCityArr(cities[region])
+    }
   }
+
+  const resetCities = () => {
+    setRegion(null)
+    setCityArr([])
+  }
+
 
   return (
     <>
@@ -83,18 +92,23 @@ const StartScreen = ({navigation}) => {
           }
           {
             region != null && (
+              <>
               <View style={Styles.textBtnContainer}>
                 <TouchableOpacity onPress={() => {setRegion(null)}}>
                   <Text style={Styles.textBtn}>Назад</Text>
                 </TouchableOpacity>
               </View>
-            )
-          }         
-          {
-            region != null && (
-              cityArr.map((item, index) => {
-                return <Text style={Styles.cityListText} key={index} onPress={() => {handleCityClick(item)}}>{item.name}</Text>
-              })
+              {
+                cityArr != undefined && (
+                  cityArr.map((item, index) => {
+                    return <Text style={Styles.cityListText} key={index} onPress={() => {handleCityClick(item)}}>{item.name}</Text>
+                  })
+                )
+              }
+              {
+                cityArr == undefined && resetCities()
+              }
+            </>
             )
           }
         </View>
