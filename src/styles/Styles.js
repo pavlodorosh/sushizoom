@@ -94,13 +94,13 @@ const Styles = StyleSheet.create({
   },
   cartItemMinMaxBtn: {
     color: Colors.light,
-    fontSize: 14,
+    fontSize: 20,
     borderColor: Colors.light,
     borderWidth: 1,
     borderRadius: 50,
-    width: 20,
-    height: 20,
-    lineHeight: 20,
+    width: 30,
+    height: 30,
+    lineHeight: 30,
     textAlign: 'center',
   },
   cartItemMinMaxWrapper: {

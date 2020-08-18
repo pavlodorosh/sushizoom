@@ -18,25 +18,23 @@ import database from '@react-native-firebase/database';
 
 const ProductsScreen = ({navigation, route}) => {
   const [products, setProducts] = useState(null)
+  const [actionProducts, setActionProducts] = useState([])
   
   const state = useSelector(state => state, [])
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if(products == null){
-      database().ref(`product}`).once('value').then(snapshot => {
-        setProducts(snapshot.val())
-      })
-      console.log(products)
-    }
-  });
+    database().ref(`product`).once('value').then(snapshot => {
+      const prods = Object.values(snapshot.val())
+      setProducts(prods.flat())
+    })
+  }, []);
 
   const addToCart = (el) => {
     dispatch({
       type: 'ADD_TO_CART',
       value: el
     })
-    
   }
 
   return (

@@ -19,11 +19,13 @@ import {RadioButton} from 'react-native-paper';
 import RadioButtonRN from 'radio-buttons-react-native';
 import Styles from '../styles/Styles';
 import Telegram from 'telegram-send-message';
+import database from '@react-native-firebase/database';
 
 const OrderScreen = ({navigation, route}) => {
   const [cart_this, setCart] = useState([]);
   const [sum, setSum] = useState(0);
   const [deliveryCash, setDeliveryCash] = useState(0);
+  const [botId, setBotId] = useState("");
 
   const [empty, isEmpty] = useState(true);
   const [person, setPerson] = useState('');
@@ -50,7 +52,9 @@ const OrderScreen = ({navigation, route}) => {
     if (state.data.cart.length > 0) {
       isEmpty(false);
     }
-    console.log(cart_this);
+    database().ref(`botId`).once('value').then(snapshot => {
+      setBotId(snapshot.val())
+    })
   }, []);
 
   const sendMessage = () => {
@@ -60,8 +64,8 @@ const OrderScreen = ({navigation, route}) => {
     cart_this.forEach(el => {
       message += el.name + '(x' + el.count + '), ';
     });
-    Telegram.setToken('868514272:AAH6bAavjGQHH-bztp9Buu1ugozGVfNCgl0');
-    Telegram.setRecipient(-487516350);
+    Telegram.setToken(botId);
+    Telegram.setRecipient(state.data.city[0].botId);
     Telegram.setMessage(message);
     Telegram.send();
     dispatch({
