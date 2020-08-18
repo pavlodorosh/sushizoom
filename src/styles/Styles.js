@@ -98,9 +98,9 @@ const Styles = StyleSheet.create({
     borderColor: Colors.light,
     borderWidth: 1,
     borderRadius: 50,
-    width: 30,
-    height: 30,
-    lineHeight: 30,
+    width: 25,
+    height: 25,
+    lineHeight: 25,
     textAlign: 'center',
   },
   cartItemMinMaxWrapper: {
