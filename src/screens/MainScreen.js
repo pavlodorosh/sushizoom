@@ -48,7 +48,7 @@ const CategoryScreen = ({navigation, route}) => {
                 </TouchableWithoutFeedback>
               </View>        
               <View style={Styles.textBtnContainer}>
-                <TouchableWithoutFeedback onPress={() => {Linking.openURL(`tel:${state.data.city.phone}`)}}>
+                <TouchableWithoutFeedback onPress={() => {Linking.openURL(`tel:${state.data.city[0].phone}`)}}>
                   <Text style={Styles.textBtnCall}>Зателефонувати</Text>
                 </TouchableWithoutFeedback>
               </View>

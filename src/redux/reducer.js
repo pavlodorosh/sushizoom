@@ -39,9 +39,11 @@ const appMainReducer = (state = INITIAL_STATE, action) => {
             if(state.cart[action.value].count > 1){
                 state.cart[action.value].count--
             }
+            state.cartCount--
             return state    
         case 'INCREASE_COUNT':
             state.cart[action.value].count++
+            state.cartCount++
             return state    
         case 'CLEAR_STATE':
             state.cartCount = 0

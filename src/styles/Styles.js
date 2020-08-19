@@ -287,6 +287,12 @@ const Styles = StyleSheet.create({
     fontWeight: 'bold'
     // bac
   },
+  errorText:{
+    color: Colors.red,
+    fontSize: 14,
+    marginBottom: -10,
+    marginTop: 10
+  },
   form: {
     marginTop: 30,
   },

@@ -41,7 +41,7 @@ const CatalogScreen = ({navigation, route}) => {
               />
               {
                 categories != null && (
-                  Object.keys(categories).reverse().map((cat, index) => {
+                  Object.keys(categories).map((cat, index) => {
                     return (
                       <View key={index}>
                          <TouchableWithoutFeedback

@@ -26,6 +26,10 @@ const OrderScreen = ({navigation, route}) => {
   const [sum, setSum] = useState(0);
   const [deliveryCash, setDeliveryCash] = useState(0);
   const [botId, setBotId] = useState("");
+  const [errorPerson, setErrorPerson] = useState(false);
+  const [errorName, setErrorName] = useState(false);
+  const [errorPhone, setErrorPhone] = useState(false);
+  const [errorAddress, setErrorAddress] = useState(false);
 
   const [empty, isEmpty] = useState(true);
   const [person, setPerson] = useState('');
@@ -246,40 +250,68 @@ const OrderScreen = ({navigation, route}) => {
                 </View>
               </View>
               <View style={Styles.form}>
+                {errorPerson && <Text style={Styles.errorText}>Поле не повине бути пустим</Text>}
                 <TextInput
                   style={Styles.input}
                   placeholder="Кількість приборів"
                   placeholderTextColor="#DAE1E7"
-                  onChangeText={v => setPerson(v)}
+                  onChangeText={v => {
+                    setPerson(v)
+                    v != '' ? setErrorPerson(false) : setErrorPerson(true)
+                  }}
                   keyboardType="numeric"
                   value={person}
                 />
+                {errorName && <Text style={Styles.errorText}>Поле не повине бути пустим</Text>}
                 <TextInput
                   style={Styles.input}
                   placeholder="П. І. П."
                   placeholderTextColor="#DAE1E7"
-                  onChangeText={v => setName(v)}
+                  onChangeText={v => {
+                    setName(v)
+                    v != '' ? setErrorName(false) : setErrorName(true)
+                  }}
                   value={name}
                 />
+                {errorPhone && <Text style={Styles.errorText}>Поле не повине бути пустим</Text>}
                 <TextInput
                   style={Styles.input}
                   placeholder="Телефон"
                   placeholderTextColor="#DAE1E7"
-                  onChangeText={v => setPhone(v)}
+                  onChangeText={v => {
+                    setPhone(v)
+                    v != '' ? setErrorPhone(false) : setErrorPhone(true)
+                  }}
                   keyboardType="phone-pad"
                   value={phone}
                 />
+                {errorAddress && <Text style={Styles.errorText}>Поле не повине бути пустим</Text>}
                 <TextInput
                   style={Styles.input}
                   placeholder="Адреса"
                   placeholderTextColor="#DAE1E7"
-                  onChangeText={v => setAddress(v)}
+                  onChangeText={v => {
+                    setAddress(v)
+                    v != '' ? setErrorAddress(false) : setErrorAddress(true)
+                  }}
                   value={address}
                 />
               </View>
               <TouchableOpacity
                 onPress={() => {
-                  if (name != '' && phone != '' && address != '') {
+                  if(person == ''){
+                    setErrorPerson(true)
+                  }
+                  if(name == ''){
+                    setErrorName(true)
+                  }
+                  if(phone == ''){
+                    setErrorPhone(true)
+                  }
+                  if(address == ''){
+                    setErrorAddress(true)
+                  }
+                  if (person != '' && name != '' && phone != '' && address != '') {
                     sendMessage();
                     isEmpty(true);
                     navigation.navigate('End');
