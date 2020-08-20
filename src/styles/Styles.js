@@ -133,14 +133,11 @@ const Styles = StyleSheet.create({
   },
   categoryImg: {
     resizeMode: 'contain',
-    height: 70,
+    height: 80,
     marginTop: 20,
   },
   categoryItem:{
-    width: formWidth / 2 - 30,
-  },
-  categoryItem:{
-    width: formWidth / 2 - 30,
+    width: formWidth / 2 - 20,
   },
   categoryProductButton: {
     alignItems: 'center',
@@ -192,11 +189,10 @@ const Styles = StyleSheet.create({
   categoryTitle: {
     color: Colors.white,
     fontSize: 18,
-    height: 50,
+    height: 45,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginVertical: 5
-    
+    marginVertical: 10,
   },
   categoryTitleAction: {
     color: Colors.red,
