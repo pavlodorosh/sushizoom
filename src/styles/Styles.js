@@ -132,10 +132,12 @@ const Styles = StyleSheet.create({
     fontSize: 24,
   },
   categoryImg: {
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     height: 150,
-    width: formWidth,
     marginTop: 50,
+  },
+  categoryItem:{
+    width: formWidth / 2 - 30,
   },
   categoryProductButton: {
     alignItems: 'center',
@@ -186,8 +188,8 @@ const Styles = StyleSheet.create({
   },
   categoryTitle: {
     color: Colors.white,
-    fontSize: 30,
-    height: 40,
+    fontSize: 24,
+    height: 30,
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 10,
@@ -202,6 +204,12 @@ const Styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
+  },
+  categoryWrapper:{
+    flexDirection: 'row',
+    flex: 1,
+    flexWrap: 'wrap',
+    justifyContent: "space-between"
   },
   cityListText: {
     marginTop: 10,
@@ -349,7 +357,7 @@ const Styles = StyleSheet.create({
     margin: 32,
     paddingHorizontal: 12,
     justifyContent: 'flex-start',
-    alignContent: 'flex-start',
+    alignContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'column',
     flexWrap: 'wrap',
