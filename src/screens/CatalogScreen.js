@@ -1,4 +1,5 @@
 import {
+    FlatList,
     Image,
     ScrollView,
     Text,
@@ -39,11 +40,12 @@ const CatalogScreen = ({navigation, route}) => {
                 source={require('../../assets/images/logo.png')}
                 style={Styles.logoCategory}
               />
+              <View style={Styles.categoryWrapper}>
               {
                 categories != null && (
                   Object.keys(categories).map((cat, index) => {
                     return (
-                      <View key={index}>
+                      <View key={index} style={Styles.categoryItem}>
                          <TouchableWithoutFeedback
                           onPress={() => {
                             navigation.navigate('Products', {id: categories[cat].id});
@@ -51,6 +53,7 @@ const CatalogScreen = ({navigation, route}) => {
                           <Image
                             source={{uri: categories[cat].image}}
                             style={Styles.categoryImg}
+                            tintColor="#cccccc"
                           />
                         </TouchableWithoutFeedback>
                         <Text
@@ -65,7 +68,7 @@ const CatalogScreen = ({navigation, route}) => {
                   })
                 )
               }
-              
+              </View>
             </View>
           </View>
         </ScrollView>

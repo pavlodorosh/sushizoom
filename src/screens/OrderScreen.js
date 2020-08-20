@@ -63,13 +63,28 @@ const OrderScreen = ({navigation, route}) => {
 
   const sendMessage = () => {
     const ch = chopstick ? 'навчальні' : 'звичайні';
-    let message = `Нове замовлення! Імя: ${name}, Сума: ${getSum(cart_this)} грн, Телефон: ${phone}, Адреса: ${address}, Кількість наборів: ${person}, Доставка: ${delivery}, Палички ${ch}... Склад замовлення: `;
+    let message = `Нове замовлення! 
+    %0AІмя: ${name},  
+    %0AСума: ${getSum(cart_this)} грн,  
+    %0AТелефон: ${phone}, `;
+
+    if(delivery != 'Самовивіз'){
+      message += `%0AАдреса: ${address}, `
+    }
+
+    message += `
+      %0AКількість наборів: ${person},  
+      %0AДоставка: ${delivery},  
+      %0AПалички ${ch},  
+      %0AСклад замовлення: `;
+    
 
     cart_this.forEach(el => {
       message += el.name + '(x' + el.count + '), ';
     });
     Telegram.setToken(botId);
     Telegram.setRecipient(state.data.city[0].botId);
+    // Telegram.setRecipient("490328195");
     Telegram.setMessage(message);
     Telegram.send();
     dispatch({
@@ -285,17 +300,24 @@ const OrderScreen = ({navigation, route}) => {
                   keyboardType="phone-pad"
                   value={phone}
                 />
-                {errorAddress && <Text style={Styles.errorText}>Поле не повине бути пустим</Text>}
-                <TextInput
-                  style={Styles.input}
-                  placeholder="Адреса"
-                  placeholderTextColor="#DAE1E7"
-                  onChangeText={v => {
-                    setAddress(v)
-                    v != '' ? setErrorAddress(false) : setErrorAddress(true)
-                  }}
-                  value={address}
-                />
+                {
+                  delivery != 'Самовивіз' && (
+                    <>
+                      {errorAddress && <Text style={Styles.errorText}>Поле не повине бути пустим</Text>}
+                      <TextInput
+                        style={Styles.input}
+                        placeholder="Адреса"
+                        placeholderTextColor="#DAE1E7"
+                        onChangeText={v => {
+                          setAddress(v)
+                          v != '' ? setErrorAddress(false) : setErrorAddress(true)
+                        }}
+                        value={address}
+                        />
+                    </>
+                  )
+                }
+                
               </View>
               <TouchableOpacity
                 onPress={() => {
@@ -311,7 +333,7 @@ const OrderScreen = ({navigation, route}) => {
                   if(address == ''){
                     setErrorAddress(true)
                   }
-                  if (person != '' && name != '' && phone != '' && address != '') {
+                  if (person != '' && name != '' && phone != '') {
                     sendMessage();
                     isEmpty(true);
                     navigation.navigate('End');
