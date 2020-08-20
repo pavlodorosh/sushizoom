@@ -53,6 +53,7 @@ const CatalogScreen = ({navigation, route}) => {
                           <Image
                             source={{uri: categories[cat].image}}
                             style={Styles.categoryImg}
+                            tintColor="#cccccc"
                           />
                         </TouchableWithoutFeedback>
                         <Text

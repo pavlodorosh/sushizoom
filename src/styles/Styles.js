@@ -132,8 +132,8 @@ const Styles = StyleSheet.create({
     fontSize: 24,
   },
   categoryImg: {
-    resizeMode: 'cover',
-    height: 150,
+    resizeMode: 'contain',
+    height: 70,
     marginTop: 50,
   },
   categoryItem:{
