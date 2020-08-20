@@ -139,6 +139,9 @@ const Styles = StyleSheet.create({
   categoryItem:{
     width: formWidth / 2 - 30,
   },
+  categoryItem:{
+    width: formWidth / 2 - 30,
+  },
   categoryProductButton: {
     alignItems: 'center',
     justifyContent: 'center',
