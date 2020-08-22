@@ -63,25 +63,28 @@ const OrderScreen = ({navigation, route}) => {
 
   const sendMessage = () => {
     const ch = chopstick ? 'навчальні' : 'звичайні';
-    let message = `Нове замовлення! 
-    %0AІмя: ${name},  
-    %0AСума: ${getSum(cart_this)} грн,  
-    %0AТелефон: ${phone}, `;
+    let message = `Нове замовлення!
+    %0AСклад замовлення: `;
+    cart_this.forEach(el => {
+      message += el.name + '(x' + el.count + '), ';
+    });
+
+    message += `
+      %0AСума: ${getSum(cart_this)} грн,        
+      %0AПалички ${ch},
+      %0AКількість наборів: ${person}, 
+      %0AДоставка: ${delivery}
+    `;
 
     if(delivery != 'Самовивіз'){
       message += `%0AАдреса: ${address}, `
     }
 
     message += `
-      %0AКількість наборів: ${person},  
-      %0AДоставка: ${delivery},  
-      %0AПалички ${ch},  
-      %0AСклад замовлення: `;
-    
-
-    cart_this.forEach(el => {
-      message += el.name + '(x' + el.count + '), ';
-    });
+      %0AІмя: ${name},  
+      %0AТелефон: ${phone}, 
+    `
+      
     Telegram.setToken(botId);
     Telegram.setRecipient(state.data.city[0].botId);
     // Telegram.setRecipient("490328195");
