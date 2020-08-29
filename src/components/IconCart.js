@@ -1,13 +1,9 @@
-import {
-  Image,
-  Text,
-  View,
-} from 'react-native';
+import {Image, Text, View} from 'react-native';
 
 import React from 'react';
 import Styles from '../styles/Styles';
 
-const IconCart = ({ count }) => {
+const IconCart = ({count}) => {
   return (
     <>
       <View style={Styles.cartIconWrapper}>

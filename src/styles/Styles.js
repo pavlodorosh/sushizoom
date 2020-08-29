@@ -10,14 +10,14 @@ const Styles = StyleSheet.create({
   back: {
     backgroundColor: Colors.black,
   },
-  backImage:{
+  backImage: {
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
     position: 'absolute',
     height: Dimensions.get('window').height,
     opacity: 0.4,
-  },  
+  },
   body: {
     backgroundColor: Colors.black,
     justifyContent: 'center',
@@ -81,7 +81,7 @@ const Styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignContent: 'center',
-    alignItems: 'center',    
+    alignItems: 'center',
   },
   cartItemCount: {
     color: Colors.light,
@@ -115,7 +115,7 @@ const Styles = StyleSheet.create({
     flexDirection: 'column',
     marginLeft: 10,
     width: formWidth - 125,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
   cartItemPrice: {
     color: Colors.light,
@@ -136,7 +136,7 @@ const Styles = StyleSheet.create({
     height: 80,
     marginTop: 20,
   },
-  categoryItem:{
+  categoryItem: {
     width: formWidth / 2 - 20,
   },
   categoryProductButton: {
@@ -205,11 +205,11 @@ const Styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'column',
   },
-  categoryWrapper:{
+  categoryWrapper: {
     flexDirection: 'row',
     flex: 1,
     flexWrap: 'wrap',
-    justifyContent: "space-between"
+    justifyContent: 'space-between',
   },
   cityListText: {
     marginTop: 10,
@@ -244,7 +244,7 @@ const Styles = StyleSheet.create({
   chopsticksWrapper: {
     flexDirection: 'column',
     width: formWidth,
-    marginBottom: 20
+    marginBottom: 20,
   },
   contactText: {
     color: Colors.white,
@@ -256,29 +256,29 @@ const Styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',
-    marginTop: 10
+    marginTop: 10,
   },
   contactTextWrapper: {
     width: formWidth,
     justifyContent: 'flex-start',
-    marginTop: 10
+    marginTop: 10,
   },
-  contactImg:{
+  contactImg: {
     width: 30,
     height: 30,
     resizeMode: 'contain',
-    marginRight: 10
+    marginRight: 10,
   },
   contactWrapper: {
     flexDirection: 'row',
-    marginBottom: 20
+    marginBottom: 20,
   },
-  deliveryTitle:{
+  deliveryTitle: {
     color: Colors.white,
-    fontSize: 22
+    fontSize: 22,
   },
-  endScreenWrapper:{
-    width: Dimensions.get('window').width - 20
+  endScreenWrapper: {
+    width: Dimensions.get('window').width - 20,
   },
   endTextSubtitle: {
     color: Colors.grey,
@@ -292,14 +292,14 @@ const Styles = StyleSheet.create({
     fontSize: 36,
     lineHeight: 54,
     marginTop: 150,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
     // bac
   },
-  errorText:{
+  errorText: {
     color: Colors.red,
     fontSize: 14,
     marginBottom: -10,
-    marginTop: 10
+    marginTop: 10,
   },
   form: {
     marginTop: 30,
@@ -343,16 +343,16 @@ const Styles = StyleSheet.create({
   radioBtn: {
     color: Colors.white,
     marginBottom: 20,
-    marginLeft: -10
+    marginLeft: -10,
   },
-  radioBtnText:{
+  radioBtnText: {
     color: Colors.white,
     marginVertical: 0,
-    fontSize: 18
+    fontSize: 18,
   },
   radioBtnWrapper: {
-    width: formWidth
-  },  
+    width: formWidth,
+  },
   sectionContainer: {
     margin: 32,
     paddingHorizontal: 12,
@@ -411,13 +411,13 @@ const Styles = StyleSheet.create({
     backgroundColor: Colors.red,
     marginBottom: 20,
   },
-  textBtnEndScreen:{
+  textBtnEndScreen: {
     color: Colors.black,
     paddingVertical: 15,
     width: formWidth / 1.5,
     textAlign: 'center',
     fontSize: 26,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   textBtnMainScreen: {
     color: Colors.white,
@@ -426,13 +426,22 @@ const Styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
   },
-  textEndBtnContainer:{
+  textEndBtnContainer: {
     borderRadius: 50,
     backgroundColor: Colors.white,
     marginBottom: 20,
     width: formWidth / 1.5,
-    marginTop: 100
-  }
+    marginTop: 100,
+  },
+  topCityText: {
+    color: Colors.white,
+    position: 'absolute',
+    top: 20,
+    zIndex: 30,
+    left: 20,
+    fontSize: 20,
+  },
+  topCityWrapper: {},
 });
 
 export default Styles;
