@@ -18,7 +18,6 @@ import TopCity from '../components/TopCity';
 import database from '@react-native-firebase/database';
 
 const ProductsScreen = ({navigation, route}) => {
-  const [products, setProducts] = useState(null);
   const [actionProducts, setActionProducts] = useState([]);
 
   const state = useSelector(state => state, []);
@@ -26,15 +25,18 @@ const ProductsScreen = ({navigation, route}) => {
 
   useEffect(() => {
     database()
-      .ref(`product`)
+      .ref(`action`)
       .once('value')
       .then(snapshot => {
-        const prods = Object.values(snapshot.val());
-        setProducts(prods.flat());
+        setActionProducts(snapshot.val());
       });
   }, []);
 
   const addToCart = el => {
+    if (state.data.city[0].name.includes('Київ')) {
+      el.price = el.price_kiev;
+      el.image = el.image_kiev;
+    }
     dispatch({
       type: 'ADD_TO_CART',
       value: el,
@@ -60,36 +62,40 @@ const ProductsScreen = ({navigation, route}) => {
               source={require('../../assets/images/logo.png')}
               style={Styles.logoCategory}
             />
-            {products != null &&
-              Object.keys(products).map((el, index) => {
-                if (products[el].action) {
+            {actionProducts != null &&
+              Object.keys(actionProducts).map((el, index) => {
+                if (actionProducts[el].action) {
                   return (
                     <View style={Styles.categoryProductSection} key={index}>
                       <Image
-                        source={{uri: products[el].image}}
+                        source={{
+                          uri: state.data.city[0].name.includes('Київ')
+                            ? actionProducts[el].image_kiev
+                            : actionProducts[el].image,
+                        }}
                         style={Styles.categoryProductImage}
                       />
                       <View
                         key={index}
                         style={Styles.categoryProductSectionText}>
                         <Text style={Styles.categoryProductTitle}>
-                          {products[el].name}
+                          {actionProducts[el].name}
                         </Text>
                         <Text style={Styles.categoryProductTitle}>
-                          {(
-                            products[el].price * state.data.city[0].priceKoef
-                          ).toFixed(0)}{' '}
+                          {state.data.city[0].name.includes('Київ')
+                            ? actionProducts[el].price_kiev
+                            : actionProducts[el].price}
                           ГРН
                         </Text>
                         <Text style={Styles.categoryProductText}>
-                          {products[el].ingredients}
+                          {actionProducts[el].ingredients}
                         </Text>
                         <Text style={Styles.categoryProductText}>
-                          {products[el].weight} гр
+                          {actionProducts[el].weight} гр
                         </Text>
                         <TouchableOpacity
                           onPress={() => {
-                            addToCart(products[el]);
+                            addToCart(actionProducts[el]);
                           }}>
                           <View styl={Styles.categoryProductButton}>
                             <Text style={Styles.categoryProductButtonText}>

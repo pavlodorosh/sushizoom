@@ -25,7 +25,7 @@ const OrderScreen = ({navigation, route}) => {
   const [cart_this, setCart] = useState([]);
   const [sum, setSum] = useState(0);
   const [deliveryCash, setDeliveryCash] = useState(0);
-  const [botId, setBotId] = useState("");
+  const [botId, setBotId] = useState('');
   const [errorPerson, setErrorPerson] = useState(false);
   const [errorName, setErrorName] = useState(false);
   const [errorPhone, setErrorPhone] = useState(false);
@@ -50,15 +50,19 @@ const OrderScreen = ({navigation, route}) => {
       label: 'Самовивіз',
     },
   ];
-  
+
   useEffect(() => {
     setCart(state.data.cart);
+    console.log(state.data.cart);
     if (state.data.cart.length > 0) {
       isEmpty(false);
     }
-    database().ref(`botId`).once('value').then(snapshot => {
-      setBotId(snapshot.val())
-    })
+    database()
+      .ref(`botId`)
+      .once('value')
+      .then(snapshot => {
+        setBotId(snapshot.val());
+      });
   }, []);
 
   const sendMessage = () => {
@@ -76,15 +80,15 @@ const OrderScreen = ({navigation, route}) => {
       %0AДоставка: ${delivery}
     `;
 
-    if(delivery != 'Самовивіз'){
-      message += `%0AАдреса: ${address}, `
+    if (delivery != 'Самовивіз') {
+      message += `%0AАдреса: ${address}, `;
     }
 
     message += `
       %0AІмя: ${name},  
       %0AТелефон: ${phone}, 
-    `
-      
+    `;
+
     Telegram.setToken(botId);
     Telegram.setRecipient(state.data.city[0].botId);
     // Telegram.setRecipient("490328195");
@@ -146,14 +150,11 @@ const OrderScreen = ({navigation, route}) => {
               />
               <View style={Styles.cartItems}>
                 {cart_this.map((item, index) => {
-                  if (item.action) {
-                    item.price = item.new_price;
-                  }
                   return (
                     <View key={index} style={Styles.cartItem}>
                       <Image
                         source={{uri: item.image}}
-                        style={Styles.cartItemImage}                        
+                        style={Styles.cartItemImage}
                         resizeMethod="resize"
                       />
                       <View style={Styles.cartItemNameWrapper}>
@@ -177,7 +178,10 @@ const OrderScreen = ({navigation, route}) => {
                             </TouchableWithoutFeedback>
                           </View>
                           <Text style={Styles.cartItemPrice}>
-                            {(item.price * state.data.city[0].priceKoef).toFixed(0,) * item.count} грн
+                            {(
+                              item.price * state.data.city[0].priceKoef
+                            ).toFixed(0) * item.count}
+                            грн
                           </Text>
                         </View>
                       </View>
@@ -268,73 +272,88 @@ const OrderScreen = ({navigation, route}) => {
                 </View>
               </View>
               <View style={Styles.form}>
-                {errorPerson && <Text style={Styles.errorText}>Поле не повине бути пустим</Text>}
+                {errorPerson && (
+                  <Text style={Styles.errorText}>
+                    Поле не повине бути пустим
+                  </Text>
+                )}
                 <TextInput
                   style={Styles.input}
                   placeholder="Кількість приборів"
                   placeholderTextColor="#DAE1E7"
                   onChangeText={v => {
-                    setPerson(v)
-                    v != '' ? setErrorPerson(false) : setErrorPerson(true)
+                    setPerson(v);
+                    v != '' ? setErrorPerson(false) : setErrorPerson(true);
                   }}
                   keyboardType="numeric"
                   value={person}
                 />
-                {errorName && <Text style={Styles.errorText}>Поле не повине бути пустим</Text>}
+                {errorName && (
+                  <Text style={Styles.errorText}>
+                    Поле не повине бути пустим
+                  </Text>
+                )}
                 <TextInput
                   style={Styles.input}
                   placeholder="П. І. П."
                   placeholderTextColor="#DAE1E7"
                   onChangeText={v => {
-                    setName(v)
-                    v != '' ? setErrorName(false) : setErrorName(true)
+                    setName(v);
+                    v != '' ? setErrorName(false) : setErrorName(true);
                   }}
                   value={name}
                 />
-                {errorPhone && <Text style={Styles.errorText}>Поле не повине бути пустим</Text>}
+                {errorPhone && (
+                  <Text style={Styles.errorText}>
+                    Поле не повине бути пустим
+                  </Text>
+                )}
                 <TextInput
                   style={Styles.input}
                   placeholder="Телефон"
                   placeholderTextColor="#DAE1E7"
                   onChangeText={v => {
-                    setPhone(v)
-                    v != '' ? setErrorPhone(false) : setErrorPhone(true)
+                    setPhone(v);
+                    v != '' ? setErrorPhone(false) : setErrorPhone(true);
                   }}
                   keyboardType="phone-pad"
                   value={phone}
                 />
-                {
-                  delivery != 'Самовивіз' && (
-                    <>
-                      {errorAddress && <Text style={Styles.errorText}>Поле не повине бути пустим</Text>}
-                      <TextInput
-                        style={Styles.input}
-                        placeholder="Адреса"
-                        placeholderTextColor="#DAE1E7"
-                        onChangeText={v => {
-                          setAddress(v)
-                          v != '' ? setErrorAddress(false) : setErrorAddress(true)
-                        }}
-                        value={address}
-                        />
-                    </>
-                  )
-                }
-                
+                {delivery != 'Самовивіз' && (
+                  <>
+                    {errorAddress && (
+                      <Text style={Styles.errorText}>
+                        Поле не повине бути пустим
+                      </Text>
+                    )}
+                    <TextInput
+                      style={Styles.input}
+                      placeholder="Адреса"
+                      placeholderTextColor="#DAE1E7"
+                      onChangeText={v => {
+                        setAddress(v);
+                        v != ''
+                          ? setErrorAddress(false)
+                          : setErrorAddress(true);
+                      }}
+                      value={address}
+                    />
+                  </>
+                )}
               </View>
               <TouchableOpacity
                 onPress={() => {
-                  if(person == ''){
-                    setErrorPerson(true)
+                  if (person == '') {
+                    setErrorPerson(true);
                   }
-                  if(name == ''){
-                    setErrorName(true)
+                  if (name == '') {
+                    setErrorName(true);
                   }
-                  if(phone == ''){
-                    setErrorPhone(true)
+                  if (phone == '') {
+                    setErrorPhone(true);
                   }
-                  if(address == ''){
-                    setErrorAddress(true)
+                  if (address == '') {
+                    setErrorAddress(true);
                   }
                   if (person != '' && name != '' && phone != '') {
                     sendMessage();
