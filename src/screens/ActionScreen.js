@@ -38,7 +38,7 @@ const ProductsScreen = ({navigation, route}) => {
       el.image = el.image_kiev;
     }
     dispatch({
-      type: 'ADD_TO_CART',
+      type: 'ADD_TO_ACTION_CART',
       value: el,
     });
   };
