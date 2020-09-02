@@ -277,11 +277,9 @@ const OrderScreen = ({ navigation, route }) => {
 									);
 								})}
 							</View>
-							{cart_this.length > 0 && (
-								<Text style={Styles.sumText}>
-									Сума: {getSum(cart_this)} грн
-								</Text>
-							)}
+							<Text style={Styles.sumText}>
+								Сума: {getSum(cart_this)} грн
+							</Text>
 
 							<View style={Styles.radioBtnWrapper}>
 								<Text style={Styles.deliveryTitle}>Варіант доставки</Text>
