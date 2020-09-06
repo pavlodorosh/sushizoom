@@ -8,17 +8,29 @@ import { useDispatch } from 'react-redux'
 const StartScreen = ({navigation}) => {
   const [region, setRegion] = useState(null);
   const [cities, setCities] = useState({});
+  const [regions, setRegions] = useState(null);
   const [cityArr, setCityArr] = useState([]);
   const dispatch = useDispatch()
-  
+
   useEffect(() => {
+    if(!regions){
+      getRegionsFromDB()   
+    }
+  })
+  
+  useEffect(() => { 
     setCities({})
-    getCitiesFromDB()    
+    getCitiesFromDB()  
   }, []);
 
   const getCitiesFromDB = () => {
     database().ref('city').once('value').then(snapshot => {
       setCities(snapshot.val())
+    })
+  }
+  const getRegionsFromDB = () => {
+    database().ref('regions').once('value').then(snapshot => {
+      setRegions(snapshot.val())
     })
   }
 
@@ -62,31 +74,19 @@ const StartScreen = ({navigation}) => {
           {
             region == null && (
               <>
-                <View style={Styles.textBtnContainer}>
-                  <TouchableOpacity onPress={() => {handleRegionClick('rivne')}}>
-                    <Text style={Styles.textBtn}>Рівненська область</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={Styles.textBtnContainer}>
-                  <TouchableOpacity onPress={() => {handleRegionClick('zhytomur')}}>
-                    <Text style={Styles.textBtn}>Житомирська область</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={Styles.textBtnContainer}>
-                  <TouchableOpacity onPress={() => {handleRegionClick('ternopil')}}>
-                    <Text style={Styles.textBtn}>Тернопільська область</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={Styles.textBtnContainer}>
-                  <TouchableOpacity onPress={() => {handleRegionClick('hmelnitsk')}}>
-                    <Text style={Styles.textBtn}>Хмельницька область</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={Styles.textBtnContainer}>
-                  <TouchableOpacity onPress={() => {handleRegionClick('kiev')}}>
-                    <Text style={Styles.textBtn}>Київська область</Text>
-                  </TouchableOpacity>
-                </View>
+                {
+                  regions && (
+                    Object.keys(regions).sort((a,b) => regions[a].order - regions[b].order).map((id, index) => {
+                      return (
+                        <View key={index} style={Styles.textBtnContainer}>
+                          <TouchableOpacity onPress={() => {handleRegionClick(id)}}>
+                            <Text style={Styles.textBtn}>{regions[id].name}</Text>
+                          </TouchableOpacity>
+                        </View>
+                      )
+                    })
+                  )
+                }
               </>
             )
           }
