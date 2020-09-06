@@ -51,31 +51,33 @@ const CatalogScreen = ({navigation, route}) => {
             <View style={Styles.categoryWrapper}>
               {categories != null &&
                 Object.keys(categories).map((cat, index) => {
-                  return (
-                    <View key={index} style={Styles.categoryItem}>
-                      <TouchableWithoutFeedback
-                        onPress={() => {
-                          navigation.navigate('Products', {
-                            id: categories[cat].id,
-                          });
-                        }}>
-                        <Image
-                          source={{uri: categories[cat].image}}
-                          style={Styles.categoryImg}
-                          tintColor="#cccccc"
-                        />
-                      </TouchableWithoutFeedback>
-                      <Text
-                        style={Styles.categoryTitle}
-                        onPress={() => {
-                          navigation.navigate('Products', {
-                            id: categories[cat].id,
-                          });
-                        }}>
-                        {categories[cat].name}
-                      </Text>
-                    </View>
-                  );
+                  if(categories[cat]){
+                    return (
+                      <View key={index} style={Styles.categoryItem}>
+                        <TouchableWithoutFeedback
+                          onPress={() => {
+                            navigation.navigate('Products', {
+                              id: categories[cat].id,
+                            });
+                          }}>
+                          <Image
+                            source={{uri: categories[cat].image}}
+                            style={Styles.categoryImg}
+                            tintColor="#cccccc"
+                          />
+                        </TouchableWithoutFeedback>
+                        <Text
+                          style={Styles.categoryTitle}
+                          onPress={() => {
+                            navigation.navigate('Products', {
+                              id: categories[cat].id,
+                            });
+                          }}>
+                          {categories[cat].name}
+                        </Text>
+                      </View>
+                    );
+                  }
                 })}
             </View>
           </View>

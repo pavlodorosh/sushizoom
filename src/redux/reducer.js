@@ -49,7 +49,8 @@ const appMainReducer = (state = INITIAL_STATE, action) => {
             action_arr.forEach(el => {
                 action_co += el.count
             })
-            state.cartCount -= action_co
+            console.log('a' + action_co);
+            state.cartCount = action_co
             state.action_cart = action_arr
             return state   
         case 'DELETE_FROM_CART':
@@ -58,7 +59,8 @@ const appMainReducer = (state = INITIAL_STATE, action) => {
             arr.forEach(el => {
                 co += el.count
             })
-            state.cartCount -= co
+            console.log('c' + co);
+            state.cartCount = co
             state.cart = arr
             return state
         case 'ACTION_DECREASE_COUNT':

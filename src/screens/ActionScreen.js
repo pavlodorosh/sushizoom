@@ -69,7 +69,7 @@ const ProductsScreen = ({navigation, route}) => {
                     <View style={Styles.categoryProductSection} key={index}>
                       <Image
                         source={{
-                          uri: state.data.city[0].name.includes('Київ')
+                          uri: state.data.city[0].priceKoef > 1
                             ? actionProducts[el].image_kiev
                             : actionProducts[el].image,
                         }}
@@ -82,7 +82,7 @@ const ProductsScreen = ({navigation, route}) => {
                           {actionProducts[el].name}
                         </Text>
                         <Text style={Styles.categoryProductTitle}>
-                          {state.data.city[0].name.includes('Київ')
+                          {state.data.city[0].priceKoef > 1
                             ? actionProducts[el].price_kiev
                             : actionProducts[el].price}
                           ГРН

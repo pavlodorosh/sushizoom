@@ -33,6 +33,7 @@ const ProductsScreen = ({navigation, route}) => {
   }, []);
 
   const addToCart = el => {
+    
     dispatch({
       type: 'ADD_TO_CART',
       value: el,
@@ -60,42 +61,44 @@ const ProductsScreen = ({navigation, route}) => {
             />
             {products != null &&
               Object.keys(products).map((el, index) => {
-                return (
-                  <View style={Styles.categoryProductSection} key={index}>
-                    <Image
-                      source={{uri: products[el].image}}
-                      style={Styles.categoryProductImage}
-                      resizeMethod="resize"
-                    />
-                    <View key={index} style={Styles.categoryProductSectionText}>
-                      <Text style={Styles.categoryProductTitle}>
-                        {products[el].name}
-                      </Text>
-                      <Text style={Styles.categoryProductTitle}>
-                        {(
-                          products[el].price * state.data.city[0].priceKoef
-                        ).toFixed(0)}{' '}
-                        ГРН
-                      </Text>
-                      <Text style={Styles.categoryProductText}>
-                        {products[el].ingredients}
-                      </Text>
-                      <Text style={Styles.categoryProductText}>
-                        {products[el].weight} гр
-                      </Text>
-                      <TouchableOpacity
-                        onPress={() => {
-                          addToCart(products[el]);
-                        }}>
-                        <View styl={Styles.categoryProductButton}>
-                          <Text style={Styles.categoryProductButtonText}>
-                            В КОШИК
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
+                if(products[el]){
+                  return (
+                    <View style={Styles.categoryProductSection} key={index}>
+                      <Image
+                        source={{uri: products[el].image}}
+                        style={Styles.categoryProductImage}
+                        resizeMethod="resize"
+                      />
+                      <View key={index} style={Styles.categoryProductSectionText}>
+                        <Text style={Styles.categoryProductTitle}>
+                          {products[el].name}
+                        </Text>
+                        <Text style={Styles.categoryProductTitle}>
+                          {(
+                            products[el].price * state.data.city[0].priceKoef
+                          ).toFixed(0)}{' '}
+                          ГРН
+                        </Text>
+                        <Text style={Styles.categoryProductText}>
+                          {products[el].ingredients}
+                        </Text>
+                        <Text style={Styles.categoryProductText}>
+                          {products[el].weight} гр
+                        </Text>
+                        <TouchableOpacity
+                          onPress={() => {
+                            addToCart(products[el]);
+                          }}>
+                          <View styl={Styles.categoryProductButton}>
+                            <Text style={Styles.categoryProductButtonText}>
+                              В КОШИК
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                      </View>
                     </View>
-                  </View>
-                );
+                  );
+                }
               })}
           </View>
         </View>
