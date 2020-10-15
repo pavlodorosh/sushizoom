@@ -61,16 +61,15 @@ const StartScreen = ({ navigation }) => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
+      
         <View style={Styles.body}>
-          <View style={Styles.sectionContainer}>
+          <View style={Styles.sectionContainer} contentContainerStyle={Styles.scrollView}>
             <Image
               source={require('../../assets/images/logo.png')}
               style={Styles.logoMain}
             />
+            <ScrollView automaticallyAdjustContentInsets={true}>
             <Text style={Styles.categoryCity}>Доставка японської кухні</Text>
-
             {
               region == null && (
                 <>
@@ -111,9 +110,10 @@ const StartScreen = ({ navigation }) => {
                 </>
               )
             }
+            
+          </ScrollView>
           </View>
         </View>
-      </ScrollView>
     </>
   );
 };

@@ -40,6 +40,19 @@ const ProductsScreen = ({navigation, route}) => {
     });
   };
 
+  const renderPrice = (el) => {
+    let price = el.price
+
+    if(state.data.city[0].priceType == '2'){
+      price = el.price2
+    }
+    if(state.data.city[0].priceType == '3'){
+      price = el.price3
+    }
+
+    return price
+  }
+
   return (
     <View style={Styles.back}>
       <StatusBar barStyle="dark-content" />
@@ -73,11 +86,8 @@ const ProductsScreen = ({navigation, route}) => {
                         <Text style={Styles.categoryProductTitle}>
                           {products[el].name}
                         </Text>
-                        <Text style={Styles.categoryProductTitle}>
-                          {(
-                            products[el].price * state.data.city[0].priceKoef
-                          ).toFixed(0)}{' '}
-                          ГРН
+                        <Text style={Styles.categoryProductTitle}>                          
+                          {renderPrice(products[el])} ГРН
                         </Text>
                         <Text style={Styles.categoryProductText}>
                           {products[el].ingredients}

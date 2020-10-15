@@ -43,6 +43,20 @@ const ProductsScreen = ({navigation, route}) => {
     });
   };
 
+  
+  const renderActionPrice = (el) => {
+    let price = el.price
+
+    if(state.data.city[0].priceType == '2'){
+      price = el.price_kiev
+    }
+    if(state.data.city[0].priceType == '3'){
+      price = el.price3
+    }
+
+    return price
+  }
+
   return (
     <View style={Styles.back}>
       <StatusBar barStyle="dark-content" />
@@ -82,10 +96,7 @@ const ProductsScreen = ({navigation, route}) => {
                           {actionProducts[el].name}
                         </Text>
                         <Text style={Styles.categoryProductTitle}>
-                          {state.data.city[0].priceKoef > 1
-                            ? actionProducts[el].price_kiev
-                            : actionProducts[el].price}
-                          ГРН
+                          {renderActionPrice(actionProducts[el])} ГРН
                         </Text>
                         <Text style={Styles.categoryProductText}>
                           {actionProducts[el].ingredients}

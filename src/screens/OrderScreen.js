@@ -108,12 +108,11 @@ const OrderScreen = ({ navigation, route }) => {
 	const getSum = products => {
 		let value = 0;
 		products.forEach(item => {
-			value +=
-				(item.price * state.data.city[0].priceKoef).toFixed(0) * item.count;
+			value += renderPrice(item) * item.count;
 		});
 
 		action_cart_this.forEach(item => {
-			value += item.price * item.count;
+			value += renderActionPrice(item) * item.count;
 		})
 
 		if (value < 300) {
@@ -171,6 +170,31 @@ const OrderScreen = ({ navigation, route }) => {
 		}
 	};
 
+	const renderPrice = (el) => {
+		let price = el.price
+
+		if(state.data.city[0].priceType == '2'){
+			price = el.price2
+		}
+		if(state.data.city[0].priceType == '3'){
+			price = el.price3
+		}
+
+		return price
+	}
+
+	const renderActionPrice = (el) => {
+		let price = el.price
+	
+		if(state.data.city[0].priceType == '2'){
+		  price = el.price_kiev
+		}
+		if(state.data.city[0].priceType == '3'){
+		  price = el.price3
+		}
+		return price
+	}
+
 	return (
 		<>
 			<ScrollView>
@@ -211,10 +235,7 @@ const OrderScreen = ({ navigation, route }) => {
 														</TouchableWithoutFeedback>
 													</View>
 													<Text style={Styles.cartItemPrice}>
-														{(
-															item.price * state.data.city[0].priceKoef
-														).toFixed(0) * item.count}
-														грн
+														{renderPrice(item)} грн
 													</Text>
 												</View>
 											</View>
@@ -259,8 +280,7 @@ const OrderScreen = ({ navigation, route }) => {
 														</TouchableWithoutFeedback>
 													</View>
 													<Text style={Styles.cartItemPrice}>
-														{item.price * item.count}
-														грн
+														{renderActionPrice(item) * item.count} грн
 													</Text>
 												</View>
 											</View>

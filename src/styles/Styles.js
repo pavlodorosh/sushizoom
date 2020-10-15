@@ -217,6 +217,8 @@ const Styles = StyleSheet.create({
     height: 30,
     fontSize: 20,
     color: Colors.white,
+    width: '100%',
+    textAlign: 'center'
   },
   chopsticksBlock: {
     marginRight: 20,
@@ -353,13 +355,16 @@ const Styles = StyleSheet.create({
   radioBtnWrapper: {
     width: formWidth,
   },
+  scrollView: {
+    //paddingVertical: 50
+  },
   sectionContainer: {
     margin: 32,
     paddingHorizontal: 12,
+    paddingBottom: 50,
     justifyContent: 'flex-start',
     alignContent: 'space-between',
     alignItems: 'center',
-    flexDirection: 'column',
     flexWrap: 'wrap',
     height: '100%',
   },
